@@ -2,6 +2,7 @@ package com.mapter.aeroclaims.permission;
 
 import com.mapter.aeroclaims.claim.Claim;
 import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
+import dev.ftb.mods.ftbteams.api.FTBTeamsAPI;
 import dev.ftb.mods.ftbteams.api.Team;
 import dev.ftb.mods.ftbteams.api.TeamManager;
 import net.minecraft.server.level.ServerPlayer;
@@ -23,7 +24,8 @@ public class FtbPermissionResolver implements ClaimPermissionResolver {
 
         if (chunks.getManager().getBypassProtection(playerUuid)) return true;
 
-        TeamManager teams = chunks.getManager().getTeamManager();
+        if (!FTBTeamsAPI.api().isManagerLoaded()) return false;  
+        TeamManager teams = FTBTeamsAPI.api().getManager();
 
         Optional<Team> playerTeam = teams.getTeamForPlayerID(playerUuid);
         Optional<Team> ownerTeam = teams.getTeamForPlayerID(ownerUuid);
