@@ -2,7 +2,7 @@ package com.mapter.aeroclaims.claim;
 
 import com.mapter.aeroclaims.permission.ClaimPermissionResolver;
 import com.mapter.aeroclaims.permission.DefaultPermissionResolver;
-import com.mapter.aeroclaims.permission.OpacPermissionResolver;
+import com.mapter.aeroclaims.permission.FtbPermissionResolver;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -22,8 +22,8 @@ public class ClaimManager {
         return PERMISSION_RESOLVER;
     }
 
-    public static void init(boolean opacLoaded) {
-        PERMISSION_RESOLVER = opacLoaded ? new OpacPermissionResolver() : new DefaultPermissionResolver();
+    public static void init(boolean ftbLoaded) {
+        PERMISSION_RESOLVER = ftbLoaded ? new FtbPermissionResolver() : new DefaultPermissionResolver();
     }
 
 
