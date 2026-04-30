@@ -19,16 +19,20 @@ public class Aeroclaims {
     public static final String MODID = "aeroclaims";
 
     public Aeroclaims(IEventBus modBus, ModContainer modContainer) {
-
+    
         ModBlocks.register(modBus);
         ModMenus.register(modBus);
-
+    
         modBus.addListener(Aeroclaims::addCreative);
         modBus.addListener(Aeroclaims::onCommonSetup);
-
+    
         modContainer.registerConfig(ModConfig.Type.SERVER, AeroClaimsConfig.SPEC);
-
-        ClaimManager.init(ModList.get().isLoaded("openpartiesandclaims"));
+    
+        boolean ftbLoaded =
+                ModList.get().isLoaded("ftbchunks") &&
+                ModList.get().isLoaded("ftbteams");
+    
+        ClaimManager.init(ftbLoaded);
     }
 
     private static void onCommonSetup(FMLCommonSetupEvent event) {
