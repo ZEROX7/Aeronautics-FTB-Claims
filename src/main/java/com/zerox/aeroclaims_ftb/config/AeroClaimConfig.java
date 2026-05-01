@@ -2,7 +2,7 @@ package com.zerox.aeroclaims_ftb.config;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-public class AeroClaimsConfig {
+public class AeroClaimConfig {
 
     public static final ModConfigSpec SPEC;
 
@@ -36,6 +36,6 @@ public class AeroClaimsConfig {
         SPEC = builder.build();
     }
 
-    private AeroClaimsConfig() {
+    private AeroClaimConfig() {
     }
 }

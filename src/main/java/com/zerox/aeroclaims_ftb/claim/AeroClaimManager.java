@@ -1,6 +1,6 @@
 package com.zerox.aeroclaims_ftb.claim;
 
-import com.zerox.aeroclaims_ftb.config.aeroclaims_ftbConfig;
+import com.zerox.aeroclaims_ftb.config.AeroClaimConfig;
 import dev.ftb.mods.ftbchunks.api.ChunkTeamData;
 import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import net.minecraft.core.BlockPos;
@@ -43,7 +43,7 @@ public class AeroClaimManager {
                 return TransferResult.NOT_ENOUGH_FREE;
             }
 
-            aeroclaims_ftbavedData.get(player.serverLevel()).addMigratedSlots(ownerId, amount);
+            AeroClaimSavedData.get(player.serverLevel()).addMigratedSlots(ownerId, amount);
 
             return TransferResult.SUCCESS;
         } catch (Exception e) {
@@ -64,7 +64,7 @@ public class AeroClaimManager {
 
             UUID ownerId = player.getUUID();
 
-            aeroclaims_ftbavedData data = aeroclaims_ftbavedData.get(player.serverLevel());
+            AeroClaimSavedData data = AeroClaimSavedData.get(player.serverLevel());
 
             if (data.getFreeSlots(ownerId) < amount) {
                 return TransferResult.NOT_ENOUGH_FREE;
@@ -81,12 +81,12 @@ public class AeroClaimManager {
     }
 
     public static int getBlockLimit(ServerLevel level, BlockPos pos) {
-        return aeroclaims_ftbavedData.get(level).getClaimsForBlock(pos)
-                * aeroclaims_ftbConfig.BLOCKS_PER_CLAIM.get();
+        return AeroClaimSavedData.get(level).getClaimsForBlock(pos)
+                * AeroClaimConfig.BLOCKS_PER_CLAIM.get();
     }
 
     public static boolean adjustClaimsForBlock(ServerLevel level, UUID owner, BlockPos pos, int delta) {
-        aeroclaims_ftbavedData data = aeroclaims_ftbavedData.get(level);
+        AeroClaimSavedData data = AeroClaimSavedData.get(level);
         int newCount = data.getClaimsForBlock(pos) + delta;
 
         if (newCount < 0) return false;
@@ -97,19 +97,19 @@ public class AeroClaimManager {
     }
 
     public static void releaseAllClaimsForBlock(ServerLevel level, UUID owner, BlockPos pos) {
-        aeroclaims_ftbavedData.get(level).removeClaimsForBlock(pos, owner);
+        AeroClaimSavedData.get(level).removeClaimsForBlock(pos, owner);
     }
 
     public static int getMigratedSlots(ServerLevel level, UUID playerId) {
-        return aeroclaims_ftbavedData.get(level).getMigratedSlots(playerId);
+        return AeroClaimSavedData.get(level).getMigratedSlots(playerId);
     }
 
     public static int getUsedSlots(ServerLevel level, UUID playerId) {
-        return aeroclaims_ftbavedData.get(level).getUsedSlots(playerId);
+        return AeroClaimSavedData.get(level).getUsedSlots(playerId);
     }
 
     public static int getFreeSlots(ServerLevel level, UUID playerId) {
-        return aeroclaims_ftbavedData.get(level).getFreeSlots(playerId);
+        return AeroClaimSavedData.get(level).getFreeSlots(playerId);
     }
 
     public static int getFreeFtbClaims(ServerPlayer player) {

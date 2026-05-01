@@ -2,7 +2,7 @@ package com.zerox.aeroclaims_ftb.mixin;
 
 import com.zerox.aeroclaims_ftb.claim.Claim;
 import com.zerox.aeroclaims_ftb.claim.ClaimManager;
-import com.zerox.aeroclaims_ftb.config.aeroclaims_ftbConfig;
+import com.zerox.aeroclaims_ftb.config.AeroClaimConfig;
 import com.zerox.aeroclaims_ftb.protect.CreateProtectionHelper;
 import com.zerox.aeroclaims_ftb.protect.IPlacerTracked;
 import com.simibubi.create.content.kinetics.base.BlockBreakingKineticBlockEntity;
@@ -40,7 +40,7 @@ public class MixinBlockBreakingKineticBlockEntity {
         if (level == null || level.isClientSide() || breakingPos == null) {
             return original;
         }
-        if (!aeroclaims_ftbConfig.KINETIC_BLOCK_PROTECTION.get()) {
+        if (!AeroClaimConfig.KINETIC_BLOCK_PROTECTION.get()) {
             return original;
         }
         if (!(level instanceof ServerLevel serverLevel)) {

@@ -1,6 +1,6 @@
 package com.zerox.aeroclaims_ftb.mixin;
 
-import com.zerox.aeroclaims_ftb.claim.aeroclaims_ftbavedData;
+import com.zerox.aeroclaims_ftb.claim.AeroClaimSavedData;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
@@ -41,7 +41,7 @@ public abstract class ChunkTeamDataMixin {
         if (server == null) return 0;
 
         ServerLevel overworld = server.overworld();
-        return aeroclaims_ftbavedData.get(overworld).getMigratedSlots(teamId);
+        return AeroClaimSavedData.get(overworld).getMigratedSlots(teamId);
     }
 
     @Inject(method = "getMaxClaimChunks", at = @At("RETURN"), cancellable = true)

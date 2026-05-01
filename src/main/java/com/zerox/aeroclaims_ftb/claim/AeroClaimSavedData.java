@@ -12,12 +12,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class AeroClaimsavedData extends SavedData {
+public class AeroClaimSavedData extends SavedData {
 
     private static final String DATA_NAME = "aeroclaims_ftb_sublevels_slots";
-    private static final Factory<aeroclaims_ftbavedData> FACTORY = new Factory<>(
-            aeroclaims_ftbavedData::new,
-            aeroclaims_ftbavedData::load,
+    private static final Factory<AeroClaimSavedData> FACTORY = new Factory<>(
+            AeroClaimSavedData::new,
+            AeroClaimSavedData::load,
             null
     );
 
@@ -32,12 +32,12 @@ public class AeroClaimsavedData extends SavedData {
     private final Map<Long, String> shipIdCache = new HashMap<>();
 
 
-    public static aeroclaims_ftbavedData get(ServerLevel level) {
+    public static AeroClaimSavedData get(ServerLevel level) {
         return level.getServer().overworld().getDataStorage().computeIfAbsent(FACTORY, DATA_NAME);
     }
 
-    public static aeroclaims_ftbavedData load(CompoundTag tag, HolderLookup.Provider registries) {
-        aeroclaims_ftbavedData data = new aeroclaims_ftbavedData();
+    public static AeroClaimSavedData load(CompoundTag tag, HolderLookup.Provider registries) {
+        AeroClaimSavedData data = new AeroClaimSavedData();
 
         for (Tag t : tag.getList("migrated", Tag.TAG_COMPOUND)) {
             CompoundTag e = (CompoundTag) t;

@@ -112,7 +112,7 @@ public class ClaimBlock extends BaseEntityBlock {
             ClaimManager.removeClaim(serverLevel, pos);
 
 
-            aeroclaims_ftbavedData data = aeroclaims_ftbavedData.get(serverLevel);
+            AeroClaimSavedData data = AeroClaimSavedData.get(serverLevel);
             data.clearCachedShipBlockCount(pos);
         }
         super.onRemove(state, level, pos, newState, moving);
@@ -151,7 +151,7 @@ public class ClaimBlock extends BaseEntityBlock {
         boolean onShip = ship != null;
         String shipName = SableShipUtils.getShipName(ship);
 
-        aeroclaims_ftbavedData data = aeroclaims_ftbavedData.get(serverLevel);
+        AeroClaimSavedData data = AeroClaimSavedData.get(serverLevel);
         int claimsForBlock = data.getClaimsForBlock(pos);
         int freeSlots = data.getFreeSlots(serverPlayer.getUUID());
 

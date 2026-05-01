@@ -1,7 +1,7 @@
 package com.zerox.aeroclaims_ftb;
 
 import com.zerox.aeroclaims_ftb.claim.ClaimManager;
-import com.zerox.aeroclaims_ftb.config.aeroclaims_ftbConfig;
+import com.zerox.aeroclaims_ftb.config.AeroClaimsConfig;
 import com.zerox.aeroclaims_ftb.registry.ModBlocks;
 import com.zerox.aeroclaims_ftb.registry.ModMenus;
 import com.zerox.aeroclaims_ftb.sublevel.SableSubLevelEventHandler;
@@ -27,7 +27,7 @@ public class Aeroclaims_ftb {
         modBus.addListener(aeroclaims_ftb::addCreative);
         modBus.addListener(aeroclaims_ftb::onCommonSetup);
     
-        modContainer.registerConfig(ModConfig.Type.SERVER, aeroclaims_ftbConfig.SPEC);
+        modContainer.registerConfig(ModConfig.Type.SERVER, AeroClaimConfig.SPEC);
     
         boolean ftbLoaded =
                 ModList.get().isLoaded("ftbchunks") &&
