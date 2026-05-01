@@ -17,9 +17,12 @@
     "MixinPlaceMergingGluePacket",
     "MixinKineticBlockEntityPlacer",
     "MixinBlockBreakingKineticBlockEntity",
-    "MixinBlockBreakingMovementBehaviour"
+    "MixinBlockBreakingMovementBehaviour",
+    "ChunkTeamDataMixin"
   ],
   "client": [],
   "server": [],
-  "injectors": { "defaultRequire": 1 }
+  "injectors": {
+    "defaultRequire": 1
+  }
 }
