@@ -3,7 +3,7 @@ loaderVersion = "[4,)"
 license = "MIT"
 
 [[mods]]
-modId="aeroclaims_ftb_ftb"
+modId="aeroclaims_ftb"
 version="1.0.0"
 displayName="Aeronautics Claims"
 authors="Mapter"
