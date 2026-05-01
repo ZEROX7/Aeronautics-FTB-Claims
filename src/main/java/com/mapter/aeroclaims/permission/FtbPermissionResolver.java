@@ -1,8 +1,11 @@
 package com.mapter.aeroclaims.permission;
 
+import com.mapter.aeroclaims.claim.Claim;
+import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import dev.ftb.mods.ftbteams.api.FTBTeamsAPI;
 import dev.ftb.mods.ftbteams.api.Team;
 import dev.ftb.mods.ftbteams.api.TeamManager;
+import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -10,21 +13,21 @@ import java.util.UUID;
 public class FtbPermissionResolver implements ClaimPermissionResolver {
 
     @Override
-    public boolean isSameParty(UUID playerUuid, UUID ownerUuid) {
-        if (!FTBTeamsAPI.api().isManagerLoaded()) return false;
+    public boolean canAccess(ServerPlayer player, Claim claim) {
+        UUID playerUuid = player.getUUID();
+        UUID ownerUuid = claim.getOwner();
 
-        TeamManager teams = FTBTeamsAPI.api().getManager();
+        if (playerUuid.equals(ownerUuid)) return true;
+        if (claim.isAllowOthers()) return true;
 
-        Optional<Team> playerTeam = teams.getTeamForPlayerID(playerUuid);
-        Optional<Team> ownerTeam = teams.getTeamForPlayerID(ownerUuid);
+        try {
+            var chunks = FTBChunksAPI.api();
+            if (chunks.isManagerLoaded() && chunks.getManager().getBypassProtection(playerUuid)) {
+                return true;
+            }
+        } catch (Exception ignored) {
+        }
 
-        return playerTeam.isPresent()
-                && ownerTeam.isPresent()
-                && playerTeam.get().getId().equals(ownerTeam.get().getId());
-    }
-
-    @Override
-    public boolean isAlly(UUID playerUuid, UUID ownerUuid) {
         if (!FTBTeamsAPI.api().isManagerLoaded()) return false;
 
         TeamManager teams = FTBTeamsAPI.api().getManager();
@@ -37,8 +40,12 @@ public class FtbPermissionResolver implements ClaimPermissionResolver {
         Team p = playerTeam.get();
         Team o = ownerTeam.get();
 
-        // FIX: correct ally detection
-        return p.isMember(ownerUuid) // same team shortcut
-                || p.getAllyTeams().contains(o.getId());
+        boolean sameTeam = p.getId().equals(o.getId());
+
+        if (claim.isAllowParty() && sameTeam) return true;
+
+        // FTB Teams API version you use does not expose ally lookup here,
+        // so treat allies as same-team for now.
+        return claim.isAllowAllies() && sameTeam;
     }
 }
