@@ -9,7 +9,6 @@ import net.minecraft.server.level.ServerPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 public class AeroClaimManager {
@@ -30,41 +29,21 @@ public class AeroClaimManager {
             var chunksApi = FTBChunksAPI.api();
             if (!chunksApi.isManagerLoaded()) return TransferResult.FTB_NOT_LOADED;
 
-            var manager = chunksApi.getManager();
-            ChunkTeamData teamData = manager.getOrCreateData(player);
+            ChunkTeamData teamData = chunksApi.getManager().getOrCreateData(player);
             if (teamData == null) return TransferResult.API_ERROR;
 
-            var claimedChunks = new ArrayList<>(teamData.getClaimedChunks());
+            UUID teamId = teamData.getTeamId();
 
-            if (claimedChunks.size() < amount) {
+            int freeFtbClaims = Math.max(
+                    0,
+                    teamData.getMaxClaimChunks() - teamData.getClaimedChunks().size()
+            );
+
+            if (freeFtbClaims < amount) {
                 return TransferResult.NOT_ENOUGH_FREE;
             }
 
-            int transferred = 0;
-
-            for (ClaimedChunk chunk : claimedChunks) {
-                if (transferred >= amount) break;
-
-                ClaimResult result = teamData.unclaim(
-                        player.createCommandSourceStack(),
-                        chunk.getPos(),
-                        false
-                );
-
-                if (!result.isSuccess()) {
-                    LOGGER.warn("[AeroClaims] Failed to unclaim FTB chunk {} for {}", chunk.getPos(), player.getGameProfile().getName());
-                    continue;
-                }
-
-                transferred++;
-            }
-
-            if (transferred < amount) {
-                return TransferResult.API_ERROR;
-            }
-
-            AeroClaimSavedData.get(player.serverLevel())
-                    .addMigratedSlots(player.getUUID(), amount);
+            AeroClaimSavedData.get(player.serverLevel()).addMigratedSlots(teamId, amount);
 
             return TransferResult.SUCCESS;
         } catch (Exception e) {
@@ -80,23 +59,19 @@ public class AeroClaimManager {
             var chunksApi = FTBChunksAPI.api();
             if (!chunksApi.isManagerLoaded()) return TransferResult.FTB_NOT_LOADED;
 
-            AeroClaimSavedData data = AeroClaimSavedData.get(player.serverLevel());
-            UUID playerId = player.getUUID();
+            ChunkTeamData teamData = chunksApi.getManager().getOrCreateData(player);
+            if (teamData == null) return TransferResult.API_ERROR;
 
-            if (data.getFreeSlots(playerId) < amount) {
+            UUID teamId = teamData.getTeamId();
+
+            AeroClaimSavedData data = AeroClaimSavedData.get(player.serverLevel());
+
+            if (data.getFreeSlots(teamId) < amount) {
                 return TransferResult.NOT_ENOUGH_FREE;
             }
 
-            int previousMigrated = data.getMigratedSlots(playerId);
-            data.setMigratedSlots(playerId, previousMigrated - amount);
-
-            ChunkTeamData teamData = chunksApi.getManager().getOrCreateData(player);
-            if (teamData == null) {
-                data.setMigratedSlots(playerId, previousMigrated);
-                return TransferResult.API_ERROR;
-            }
-
-            teamData.setExtraClaimChunks(teamData.getExtraClaimChunks() + amount);
+            int previousMigrated = data.getMigratedSlots(teamId);
+            data.setMigratedSlots(teamId, previousMigrated - amount);
 
             return TransferResult.SUCCESS;
         } catch (Exception e) {
