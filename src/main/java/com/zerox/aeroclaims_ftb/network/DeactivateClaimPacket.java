@@ -41,7 +41,7 @@ public record DeactivateClaimPacket(BlockPos center) implements CustomPacketPayl
             ClaimManager.deactivateClaim(level, msg.center);
             player.sendSystemMessage(Component.translatable("message.aeroclaims_ftb.claim_deactivated"));
 
-            aeroclaims_ftbavedData data = aeroclaims_ftbavedData.get(level);
+            AeroClaimSavedData data = AeroClaimSavedData.get(level);
             Integer cachedCount = data.getCachedShipBlockCount(msg.center);
             int shipBlockCount = cachedCount != null ? cachedCount : SyncClaimStatePacket.SHIP_BLOCK_COUNT_UNKNOWN;
             PacketDistributor.sendToPlayer(player, new SyncClaimStatePacket(
@@ -52,7 +52,7 @@ public record DeactivateClaimPacket(BlockPos center) implements CustomPacketPayl
                     claim.isAllowOthers(),
                     data.getClaimsForBlock(msg.center),
                     data.getFreeSlots(player.getUUID()),
-                    aeroclaims_ftbConfig.BLOCKS_PER_CLAIM.get(),
+                    AeroClaimConfig.BLOCKS_PER_CLAIM.get(),
                     shipBlockCount
             ));
         });

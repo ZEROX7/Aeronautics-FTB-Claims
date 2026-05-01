@@ -171,7 +171,7 @@ public class ProtectionEvents {
 
     @SubscribeEvent
     public static void onExplosionDetonate(ExplosionEvent.Detonate event) {
-        if (!aeroclaims_ftbConfig.EXPLOSION_PROTECTION.get()) return;
+        if (!AeroClaimConfig.EXPLOSION_PROTECTION.get()) return;
         if (!(event.getLevel() instanceof ServerLevel level)) return;
 
         event.getAffectedBlocks().removeIf(pos -> {

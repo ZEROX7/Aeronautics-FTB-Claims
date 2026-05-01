@@ -1,8 +1,8 @@
 package com.zerox.aeroclaims_ftb.block;
 
 import com.zerox.aeroclaims_ftb.claim.AeroClaimManager;
-import com.zerox.aeroclaims_ftb.config.aeroclaims_ftbConfig;
-import com.zerox.aeroclaims_ftb.claim.aeroclaims_ftbavedData;
+import com.zerox.aeroclaims_ftb.config.AeroClaimConfig;
+import com.zerox.aeroclaims_ftb.claim.AeroClaimSavedData;
 import com.zerox.aeroclaims_ftb.claim.Claim;
 import com.zerox.aeroclaims_ftb.claim.ClaimManager;
 import com.zerox.aeroclaims_ftb.network.SyncClaimStatePacket;
@@ -170,7 +170,7 @@ public class ClaimBlock extends BaseEntityBlock {
             buf.writeBoolean(finalClaim.isAllowOthers());
             buf.writeInt(claimsForBlock);
             buf.writeInt(freeSlots);
-            buf.writeInt(aeroclaims_ftbConfig.BLOCKS_PER_CLAIM.get());
+            buf.writeInt(AeroClaimConfig.BLOCKS_PER_CLAIM.get());
             buf.writeInt(initialBlockCount);
         });
 

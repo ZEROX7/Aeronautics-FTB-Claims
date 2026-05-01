@@ -46,11 +46,11 @@ public record AdjustBlockClaimsPacket(BlockPos center, int delta) implements Cus
                 return;
             }
 
-            aeroclaims_ftbavedData data = aeroclaims_ftbavedData.get(level);
+            AeroClaimSavedData data = AeroClaimSavedData.get(level);
 
             if (msg.delta < 0 && claim.isActive()) {
                 int newLimit = (data.getClaimsForBlock(msg.center) + msg.delta)
-                        * aeroclaims_ftbConfig.BLOCKS_PER_CLAIM.get();
+                        * AeroClaimConfig.BLOCKS_PER_CLAIM.get();
                 if (newLimit >= 0 && ClaimManager.countShipBlocks(level, msg.center, newLimit + 1) > newLimit) {
                     player.sendSystemMessage(Component.translatable("message.aeroclaims_ftb.cannot_reduce_claims_ship_too_large"));
                     sync(player, msg.center, claim, data);
@@ -66,7 +66,7 @@ public record AdjustBlockClaimsPacket(BlockPos center, int delta) implements Cus
         });
     }
 
-    private static void sync(ServerPlayer player, BlockPos center, Claim claim, aeroclaims_ftbavedData data) {
+    private static void sync(ServerPlayer player, BlockPos center, Claim claim, AeroClaimSavedData data) {
         PacketDistributor.sendToPlayer(player, new SyncClaimStatePacket(
                 center,
                 claim.isActive(),
@@ -75,7 +75,7 @@ public record AdjustBlockClaimsPacket(BlockPos center, int delta) implements Cus
                 claim.isAllowOthers(),
                 data.getClaimsForBlock(center),
                 data.getFreeSlots(player.getUUID()),
-                aeroclaims_ftbConfig.BLOCKS_PER_CLAIM.get(),
+                AeroClaimConfig.BLOCKS_PER_CLAIM.get(),
                 SyncClaimStatePacket.SHIP_BLOCK_COUNT_UNKNOWN
         ));
     }

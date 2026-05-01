@@ -104,7 +104,7 @@ public record RefreshClaimPacket(BlockPos center) implements CustomPacketPayload
         SubLevel ship = SableShipUtils.getShipAt(level, center);
         String shipId = SableShipUtils.getShipId(ship);
 
-        aeroclaims_ftbavedData data = aeroclaims_ftbavedData.get(level);
+        AeroClaimSavedData data = AeroClaimSavedData.get(level);
         data.cacheShipBlockCount(center, blockCount);
         if (shipId != null) {
             data.cacheShipId(center, shipId);
@@ -113,7 +113,7 @@ public record RefreshClaimPacket(BlockPos center) implements CustomPacketPayload
 
     private static void sync(ServerPlayer player, BlockPos center, Claim claim,
                               ServerLevel level, int shipBlockCount) {
-        aeroclaims_ftbavedData data = aeroclaims_ftbavedData.get(level);
+        AeroClaimSavedData data = AeroClaimSavedData.get(level);
         PacketDistributor.sendToPlayer(player, new SyncClaimStatePacket(
                 center,
                 claim.isActive(),
@@ -122,7 +122,7 @@ public record RefreshClaimPacket(BlockPos center) implements CustomPacketPayload
                 claim.isAllowOthers(),
                 data.getClaimsForBlock(center),
                 data.getFreeSlots(player.getUUID()),
-                aeroclaims_ftbConfig.BLOCKS_PER_CLAIM.get(),
+                AeroClaimConfig.BLOCKS_PER_CLAIM.get(),
                 shipBlockCount
         ));
     }

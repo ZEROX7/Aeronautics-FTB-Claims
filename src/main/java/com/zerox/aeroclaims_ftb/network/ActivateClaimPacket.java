@@ -117,7 +117,7 @@ public record ActivateClaimPacket(BlockPos center) implements CustomPacketPayloa
 
     private static void sync(ServerPlayer player, BlockPos center, Claim claim,
                               ServerLevel level, int shipBlockCount) {
-        aeroclaims_ftbavedData data = aeroclaims_ftbavedData.get(level);
+        AeroClaimSavedData data = AeroClaimSavedData.get(level);
         if (shipBlockCount != SyncClaimStatePacket.SHIP_BLOCK_COUNT_UNKNOWN) {
             data.cacheShipBlockCount(center, shipBlockCount);
         }
@@ -129,7 +129,7 @@ public record ActivateClaimPacket(BlockPos center) implements CustomPacketPayloa
                 claim.isAllowOthers(),
                 data.getClaimsForBlock(center),
                 data.getFreeSlots(player.getUUID()),
-                aeroclaims_ftbConfig.BLOCKS_PER_CLAIM.get(),
+                AeroClaimConfig.BLOCKS_PER_CLAIM.get(),
                 shipBlockCount
         ));
     }
