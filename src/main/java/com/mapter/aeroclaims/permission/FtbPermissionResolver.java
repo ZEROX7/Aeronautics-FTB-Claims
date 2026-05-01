@@ -3,11 +3,9 @@ package com.mapter.aeroclaims.permission;
 import com.mapter.aeroclaims.claim.Claim;
 import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import dev.ftb.mods.ftbteams.api.FTBTeamsAPI;
-import dev.ftb.mods.ftbteams.api.Team;
 import dev.ftb.mods.ftbteams.api.TeamManager;
 import net.minecraft.server.level.ServerPlayer;
 
-import java.util.Optional;
 import java.util.UUID;
 
 public class FtbPermissionResolver implements ClaimPermissionResolver {
@@ -32,20 +30,12 @@ public class FtbPermissionResolver implements ClaimPermissionResolver {
 
         TeamManager teams = FTBTeamsAPI.api().getManager();
 
-        Optional<Team> playerTeam = teams.getTeamForPlayerID(playerUuid);
-        Optional<Team> ownerTeam = teams.getTeamForPlayerID(ownerUuid);
+        boolean sameTeam = teams.arePlayersInSameTeam(playerUuid, ownerUuid);
 
-        if (playerTeam.isEmpty() || ownerTeam.isEmpty()) return false;
+        if (sameTeam) {
+            return claim.isAllowParty();
+        }
 
-        Team p = playerTeam.get();
-        Team o = ownerTeam.get();
-
-        boolean sameTeam = p.getId().equals(o.getId());
-
-        if (claim.isAllowParty() && sameTeam) return true;
-
-        // FTB Teams API version you use does not expose ally lookup here,
-        // so treat allies as same-team for now.
-        return claim.isAllowAllies() && sameTeam;
+        return false;
     }
 }
