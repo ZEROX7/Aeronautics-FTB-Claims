@@ -1,0 +1,28 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.mapter.aeroclaims_ftb.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MixinBlockEntityConfigurationPacket",
+    "MixinClipboardEditPacket",
+    "MixinToolboxDisposeAllPacket",
+    "MixinToolboxEquipPacket",
+    "MixinRadialWrenchMenuSubmitPacket",
+    "MixinSuperGlueSelectionPacket",
+    "MixinSuperGlueRemovalPacket",
+    "MixinAssemblePacket",
+    "MixinHoneyGlueSpawnPacket",
+    "MixinHoneyGlueChangeBoundsPacket",
+    "MixinPlaceMergingGluePacket",
+    "MixinKineticBlockEntityPlacer",
+    "MixinBlockBreakingKineticBlockEntity",
+    "MixinBlockBreakingMovementBehaviour",
+    "ChunkTeamDataMixin"
+  ],
+  "client": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
