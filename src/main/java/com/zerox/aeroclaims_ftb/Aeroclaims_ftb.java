@@ -1,7 +1,7 @@
 package com.zerox.aeroclaims_ftb;
 
 import com.zerox.aeroclaims_ftb.claim.ClaimManager;
-import com.zerox.aeroclaims_ftb.config.AeroClaimsConfig;
+import com.zerox.aeroclaims_ftb.config.AeroClaimConfig;
 import com.zerox.aeroclaims_ftb.registry.ModBlocks;
 import com.zerox.aeroclaims_ftb.registry.ModMenus;
 import com.zerox.aeroclaims_ftb.sublevel.SableSubLevelEventHandler;
@@ -24,8 +24,8 @@ public class Aeroclaims_ftb {
         ModBlocks.register(modBus);
         ModMenus.register(modBus);
     
-        modBus.addListener(aeroclaims_ftb::addCreative);
-        modBus.addListener(aeroclaims_ftb::onCommonSetup);
+        modBus.addListener(Aeroclaims_ftb::addCreative);
+        modBus.addListener(Aeroclaims_ftb::onCommonSetup);
     
         modContainer.registerConfig(ModConfig.Type.SERVER, AeroClaimConfig.SPEC);
     
