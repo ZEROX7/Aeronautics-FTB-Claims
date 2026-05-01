@@ -2,8 +2,6 @@ package com.mapter.aeroclaims.claim;
 
 import com.mapter.aeroclaims.config.AeroClaimsConfig;
 import dev.ftb.mods.ftbchunks.api.ChunkTeamData;
-import dev.ftb.mods.ftbchunks.api.ClaimResult;
-import dev.ftb.mods.ftbchunks.api.ClaimedChunk;
 import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
