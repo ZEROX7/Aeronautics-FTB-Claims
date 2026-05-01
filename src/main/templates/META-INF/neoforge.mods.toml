@@ -6,9 +6,9 @@ license = "MIT"
 modId="aeroclaims_ftb"
 version="1.0.0"
 displayName="Aeronautics Claims"
-authors="Mapter"
+authors="ZEROX"
 description='''
-Aeronautics Claims.
+Aeronautics Claims. FTB Fork
 '''
 
 [[mixins]]
