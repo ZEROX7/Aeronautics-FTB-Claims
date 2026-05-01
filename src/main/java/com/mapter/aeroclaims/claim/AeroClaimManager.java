@@ -32,7 +32,7 @@ public class AeroClaimManager {
             ChunkTeamData teamData = chunksApi.getManager().getOrCreateData(player);
             if (teamData == null) return TransferResult.API_ERROR;
 
-            UUID teamId = teamData.getTeamId();
+            UUID teamId = teamData.getTeam().getTeamId();
 
             int freeFtbClaims = Math.max(
                     0,
@@ -62,7 +62,7 @@ public class AeroClaimManager {
             ChunkTeamData teamData = chunksApi.getManager().getOrCreateData(player);
             if (teamData == null) return TransferResult.API_ERROR;
 
-            UUID teamId = teamData.getTeamId();
+            UUID teamId = teamData.getTeam().getTeamId();
 
             AeroClaimSavedData data = AeroClaimSavedData.get(player.serverLevel());
 
