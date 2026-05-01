@@ -36,6 +36,6 @@ public class AeroClaimsConfig {
         SPEC = builder.build();
     }
 
-    private aeroclaims_ftbConfig() {
+    private AeroClaimsConfig() {
     }
 }
