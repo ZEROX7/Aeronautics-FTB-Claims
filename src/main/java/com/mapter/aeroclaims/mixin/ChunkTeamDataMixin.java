@@ -1,7 +1,6 @@
 package com.mapter.aeroclaims.mixin;
 
 import com.mapter.aeroclaims.claim.AeroClaimSavedData;
-import dev.ftb.mods.ftbchunks.api.ChunkTeamData;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
@@ -14,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
-@Mixin(value = ChunkTeamData.class, remap = false)
-public interface ChunkTeamDataMixin {
+@Mixin(targets = "dev.ftb.mods.ftbchunks.data.ChunkTeamDataImpl", remap = false)
+public abstract class ChunkTeamDataMixin {
 
     @Unique
     private UUID aeroclaims$getTeamIdReflective() {
