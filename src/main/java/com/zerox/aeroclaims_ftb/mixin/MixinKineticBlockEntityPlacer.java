@@ -1,6 +1,6 @@
-package com.mapter.aeroclaims_ftb.mixin;
+package com.zerox.aeroclaims_ftb.mixin;
 
-import com.mapter.aeroclaims_ftb.protect.IPlacerTracked;
+import com.zerox.aeroclaims_ftb.protect.IPlacerTracked;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;

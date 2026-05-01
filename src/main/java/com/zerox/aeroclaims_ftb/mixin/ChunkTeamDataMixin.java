@@ -1,6 +1,6 @@
-package com.mapter.aeroclaims_ftb.mixin;
+package com.zerox.aeroclaims_ftb.mixin;
 
-import com.mapter.aeroclaims_ftb.claim.aeroclaims_ftbavedData;
+import com.zerox.aeroclaims_ftb.claim.aeroclaims_ftbavedData;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;

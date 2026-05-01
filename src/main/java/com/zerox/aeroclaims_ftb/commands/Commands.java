@@ -1,6 +1,6 @@
-package com.mapter.aeroclaims_ftb.commands;
+package com.zerox.aeroclaims_ftb.commands;
 
-import com.mapter.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
 import net.neoforged.bus.api.SubscribeEvent;

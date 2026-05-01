@@ -1,6 +1,6 @@
-package com.mapter.aeroclaims_ftb.mixin;
+package com.zerox.aeroclaims_ftb.mixin;
 
-import com.mapter.aeroclaims_ftb.protect.CreateProtectionHelper;
+import com.zerox.aeroclaims_ftb.protect.CreateProtectionHelper;
 import com.simibubi.create.content.contraptions.glue.SuperGlueRemovalPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;

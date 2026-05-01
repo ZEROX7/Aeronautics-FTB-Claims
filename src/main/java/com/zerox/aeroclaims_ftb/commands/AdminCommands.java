@@ -1,8 +1,8 @@
-package com.mapter.aeroclaims_ftb.commands;
+package com.zerox.aeroclaims_ftb.commands;
 
-import com.mapter.aeroclaims_ftb.sublevel.RegisteredSublevelManager;
-import com.mapter.aeroclaims_ftb.sublevel.SableShipUtils;
-import com.mapter.aeroclaims_ftb.sublevel.UnregisteredSublevelManager;
+import com.zerox.aeroclaims_ftb.sublevel.RegisteredSublevelManager;
+import com.zerox.aeroclaims_ftb.sublevel.SableShipUtils;
+import com.zerox.aeroclaims_ftb.sublevel.UnregisteredSublevelManager;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;

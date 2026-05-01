@@ -1,10 +1,10 @@
-package com.mapter.aeroclaims_ftb.sublevel;
+package com.zerox.aeroclaims_ftb.sublevel;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.mapter.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.neoforged.bus.api.SubscribeEvent;

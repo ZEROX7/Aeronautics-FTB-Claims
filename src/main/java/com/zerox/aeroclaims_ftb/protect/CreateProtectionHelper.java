@@ -1,7 +1,7 @@
-package com.mapter.aeroclaims_ftb.protect;
+package com.zerox.aeroclaims_ftb.protect;
 
-import com.mapter.aeroclaims_ftb.claim.Claim;
-import com.mapter.aeroclaims_ftb.claim.ClaimManager;
+import com.zerox.aeroclaims_ftb.claim.Claim;
+import com.zerox.aeroclaims_ftb.claim.ClaimManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;

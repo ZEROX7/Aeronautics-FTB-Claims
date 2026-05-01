@@ -1,10 +1,10 @@
-package com.mapter.aeroclaims_ftb.network;
+package com.zerox.aeroclaims_ftb.network;
 
-import com.mapter.aeroclaims_ftb.aeroclaims_ftb;
-import com.mapter.aeroclaims_ftb.claim.aeroclaims_ftbavedData;
-import com.mapter.aeroclaims_ftb.claim.Claim;
-import com.mapter.aeroclaims_ftb.claim.ClaimManager;
-import com.mapter.aeroclaims_ftb.config.aeroclaims_ftbConfig;
+import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.claim.aeroclaims_ftbavedData;
+import com.zerox.aeroclaims_ftb.claim.Claim;
+import com.zerox.aeroclaims_ftb.claim.ClaimManager;
+import com.zerox.aeroclaims_ftb.config.aeroclaims_ftbConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;

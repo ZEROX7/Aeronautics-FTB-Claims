@@ -1,9 +1,9 @@
-package com.mapter.aeroclaims_ftb.sublevel;
+package com.zerox.aeroclaims_ftb.sublevel;
 
-import com.mapter.aeroclaims_ftb.claim.Claim;
-import com.mapter.aeroclaims_ftb.claim.ClaimManager;
-import com.mapter.aeroclaims_ftb.claim.ClaimSavedData;
-import com.mapter.aeroclaims_ftb.claim.AeroClaimManager;
+import com.zerox.aeroclaims_ftb.claim.Claim;
+import com.zerox.aeroclaims_ftb.claim.ClaimManager;
+import com.zerox.aeroclaims_ftb.claim.ClaimSavedData;
+import com.zerox.aeroclaims_ftb.claim.AeroClaimManager;
 import dev.ryanhcode.sable.api.sublevel.SubLevelContainer;
 import dev.ryanhcode.sable.api.sublevel.SubLevelObserver;
 import dev.ryanhcode.sable.platform.SableEventPlatform;

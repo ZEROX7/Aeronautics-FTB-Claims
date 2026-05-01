@@ -1,7 +1,7 @@
-package com.mapter.aeroclaims_ftb.registry;
+package com.zerox.aeroclaims_ftb.registry;
 
-import com.mapter.aeroclaims_ftb.screen.ClaimSettingsMenu;
-import com.mapter.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.screen.ClaimSettingsMenu;
+import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.bus.api.IEventBus;

@@ -1,7 +1,7 @@
-package com.mapter.aeroclaims_ftb.sublevel;
+package com.zerox.aeroclaims_ftb.sublevel;
 
-import com.mapter.aeroclaims_ftb.aeroclaims_ftb;
-import com.mapter.aeroclaims_ftb.claim.Claim;
+import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.claim.Claim;
 import dev.ryanhcode.sable.api.sublevel.ServerSubLevelContainer;
 import dev.ryanhcode.sable.api.sublevel.SubLevelContainer;
 import dev.ryanhcode.sable.sublevel.ServerSubLevel;

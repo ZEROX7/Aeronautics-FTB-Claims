@@ -1,4 +1,4 @@
-package com.mapter.aeroclaims_ftb.claim;
+package com.zerox.aeroclaims_ftb.claim;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class aeroclaims_ftbavedData extends SavedData {
+public class AeroClaimsavedData extends SavedData {
 
     private static final String DATA_NAME = "aeroclaims_ftb_sublevels_slots";
     private static final Factory<aeroclaims_ftbavedData> FACTORY = new Factory<>(

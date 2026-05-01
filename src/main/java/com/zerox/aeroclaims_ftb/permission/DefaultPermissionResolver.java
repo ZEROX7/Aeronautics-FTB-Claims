@@ -1,6 +1,6 @@
-package com.mapter.aeroclaims_ftb.permission;
+package com.zerox.aeroclaims_ftb.permission;
 
-import com.mapter.aeroclaims_ftb.claim.Claim;
+import com.zerox.aeroclaims_ftb.claim.Claim;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.UUID;

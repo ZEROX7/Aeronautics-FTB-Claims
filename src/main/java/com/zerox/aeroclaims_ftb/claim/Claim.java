@@ -1,4 +1,4 @@
-package com.mapter.aeroclaims_ftb.claim;
+package com.zerox.aeroclaims_ftb.claim;
 
 import net.minecraft.core.BlockPos;
 

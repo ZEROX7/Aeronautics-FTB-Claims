@@ -1,7 +1,7 @@
-package com.mapter.aeroclaims_ftb.screen;
+package com.zerox.aeroclaims_ftb.screen;
 
-import com.mapter.aeroclaims_ftb.block.ClaimBlock;
-import com.mapter.aeroclaims_ftb.registry.ModMenus;
+import com.zerox.aeroclaims_ftb.block.ClaimBlock;
+import com.zerox.aeroclaims_ftb.registry.ModMenus;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;

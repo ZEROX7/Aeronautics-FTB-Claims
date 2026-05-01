@@ -1,8 +1,8 @@
-package com.mapter.aeroclaims_ftb.client;
+package com.zerox.aeroclaims_ftb.client;
 
-import com.mapter.aeroclaims_ftb.aeroclaims_ftb;
-import com.mapter.aeroclaims_ftb.registry.ModMenus;
-import com.mapter.aeroclaims_ftb.screen.ClaimSettingsScreen;
+import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.registry.ModMenus;
+import com.zerox.aeroclaims_ftb.screen.ClaimSettingsScreen;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

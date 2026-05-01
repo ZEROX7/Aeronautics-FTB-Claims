@@ -1,6 +1,6 @@
-package com.mapter.aeroclaims_ftb.claim;
+package com.zerox.aeroclaims_ftb.claim;
 
-import com.mapter.aeroclaims_ftb.config.aeroclaims_ftbConfig;
+import com.zerox.aeroclaims_ftb.config.aeroclaims_ftbConfig;
 import dev.ftb.mods.ftbchunks.api.ChunkTeamData;
 import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import net.minecraft.core.BlockPos;

@@ -1,9 +1,9 @@
-package com.mapter.aeroclaims_ftb.network;
+package com.zerox.aeroclaims_ftb.network;
 
-import com.mapter.aeroclaims_ftb.aeroclaims_ftb;
-import com.mapter.aeroclaims_ftb.sublevel.RegisteredSublevelManager;
-import com.mapter.aeroclaims_ftb.sublevel.SableShipUtils;
-import com.mapter.aeroclaims_ftb.sublevel.UnregisteredSublevelManager;
+import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.sublevel.RegisteredSublevelManager;
+import com.zerox.aeroclaims_ftb.sublevel.SableShipUtils;
+import com.zerox.aeroclaims_ftb.sublevel.UnregisteredSublevelManager;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;

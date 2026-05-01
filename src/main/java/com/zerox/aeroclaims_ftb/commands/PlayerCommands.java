@@ -1,7 +1,7 @@
-package com.mapter.aeroclaims_ftb.commands;
+package com.zerox.aeroclaims_ftb.commands;
 
-import com.mapter.aeroclaims_ftb.claim.AeroClaimManager;
-import com.mapter.aeroclaims_ftb.sublevel.RegisteredSublevelManager;
+import com.zerox.aeroclaims_ftb.claim.AeroClaimManager;
+import com.zerox.aeroclaims_ftb.sublevel.RegisteredSublevelManager;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.minecraft.commands.CommandSourceStack;

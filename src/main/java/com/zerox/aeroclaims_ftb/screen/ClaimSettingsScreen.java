@@ -1,12 +1,12 @@
-package com.mapter.aeroclaims_ftb.screen;
+package com.zerox.aeroclaims_ftb.screen;
 
-import com.mapter.aeroclaims_ftb.aeroclaims_ftb;
-import com.mapter.aeroclaims_ftb.network.ActivateClaimPacket;
-import com.mapter.aeroclaims_ftb.network.AdjustBlockClaimsPacket;
-import com.mapter.aeroclaims_ftb.network.DeactivateClaimPacket;
-import com.mapter.aeroclaims_ftb.network.RefreshClaimPacket;
-import com.mapter.aeroclaims_ftb.network.SyncClaimStatePacket;
-import com.mapter.aeroclaims_ftb.network.UpdateClaimSettingsPacket;
+import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.network.ActivateClaimPacket;
+import com.zerox.aeroclaims_ftb.network.AdjustBlockClaimsPacket;
+import com.zerox.aeroclaims_ftb.network.DeactivateClaimPacket;
+import com.zerox.aeroclaims_ftb.network.RefreshClaimPacket;
+import com.zerox.aeroclaims_ftb.network.SyncClaimStatePacket;
+import com.zerox.aeroclaims_ftb.network.UpdateClaimSettingsPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;

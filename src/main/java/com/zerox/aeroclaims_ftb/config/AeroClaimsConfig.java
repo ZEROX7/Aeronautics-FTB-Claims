@@ -1,8 +1,8 @@
-package com.mapter.aeroclaims_ftb.config;
+package com.zerox.aeroclaims_ftb.config;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-public class aeroclaims_ftbConfig {
+public class AeroClaimsConfig {
 
     public static final ModConfigSpec SPEC;
 

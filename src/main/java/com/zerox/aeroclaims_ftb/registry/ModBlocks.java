@@ -1,8 +1,8 @@
-package com.mapter.aeroclaims_ftb.registry;
+package com.zerox.aeroclaims_ftb.registry;
 
-import com.mapter.aeroclaims_ftb.block.ClaimBlock;
-import com.mapter.aeroclaims_ftb.block.ClaimBlockEntity;
-import com.mapter.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.block.ClaimBlock;
+import com.zerox.aeroclaims_ftb.block.ClaimBlockEntity;
+import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;

@@ -1,6 +1,6 @@
-package com.mapter.aeroclaims_ftb.network;
+package com.zerox.aeroclaims_ftb.network;
 
-import com.mapter.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.RegistryFriendlyByteBuf;

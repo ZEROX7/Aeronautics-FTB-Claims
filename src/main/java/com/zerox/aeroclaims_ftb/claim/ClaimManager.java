@@ -1,8 +1,8 @@
-package com.mapter.aeroclaims_ftb.claim;
+package com.zerox.aeroclaims_ftb.claim;
 
-import com.mapter.aeroclaims_ftb.permission.ClaimPermissionResolver;
-import com.mapter.aeroclaims_ftb.permission.DefaultPermissionResolver;
-import com.mapter.aeroclaims_ftb.permission.FtbPermissionResolver;
+import com.zerox.aeroclaims_ftb.permission.ClaimPermissionResolver;
+import com.zerox.aeroclaims_ftb.permission.DefaultPermissionResolver;
+import com.zerox.aeroclaims_ftb.permission.FtbPermissionResolver;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

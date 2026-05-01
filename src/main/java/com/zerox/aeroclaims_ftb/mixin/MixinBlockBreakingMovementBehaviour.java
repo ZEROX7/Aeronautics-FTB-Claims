@@ -1,9 +1,9 @@
-package com.mapter.aeroclaims_ftb.mixin;
+package com.zerox.aeroclaims_ftb.mixin;
 
-import com.mapter.aeroclaims_ftb.claim.Claim;
-import com.mapter.aeroclaims_ftb.claim.ClaimManager;
-import com.mapter.aeroclaims_ftb.config.aeroclaims_ftbConfig;
-import com.mapter.aeroclaims_ftb.protect.CreateProtectionHelper;
+import com.zerox.aeroclaims_ftb.claim.Claim;
+import com.zerox.aeroclaims_ftb.claim.ClaimManager;
+import com.zerox.aeroclaims_ftb.config.aeroclaims_ftbConfig;
+import com.zerox.aeroclaims_ftb.protect.CreateProtectionHelper;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import com.simibubi.create.content.kinetics.base.BlockBreakingMovementBehaviour;
 import net.minecraft.core.BlockPos;

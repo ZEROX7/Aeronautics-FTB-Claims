@@ -1,10 +1,10 @@
-package com.mapter.aeroclaims_ftb;
+package com.zerox.aeroclaims_ftb;
 
-import com.mapter.aeroclaims_ftb.claim.ClaimManager;
-import com.mapter.aeroclaims_ftb.config.aeroclaims_ftbConfig;
-import com.mapter.aeroclaims_ftb.registry.ModBlocks;
-import com.mapter.aeroclaims_ftb.registry.ModMenus;
-import com.mapter.aeroclaims_ftb.sublevel.SableSubLevelEventHandler;
+import com.zerox.aeroclaims_ftb.claim.ClaimManager;
+import com.zerox.aeroclaims_ftb.config.aeroclaims_ftbConfig;
+import com.zerox.aeroclaims_ftb.registry.ModBlocks;
+import com.zerox.aeroclaims_ftb.registry.ModMenus;
+import com.zerox.aeroclaims_ftb.sublevel.SableSubLevelEventHandler;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -15,7 +15,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 @Mod(aeroclaims_ftb.MODID)
-public class aeroclaims_ftb {
+public class AeroClaims {
     public static final String MODID = "aeroclaims_ftb";
 
     public aeroclaims_ftb(IEventBus modBus, ModContainer modContainer) {

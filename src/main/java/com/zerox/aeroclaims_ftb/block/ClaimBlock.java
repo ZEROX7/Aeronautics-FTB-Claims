@@ -1,15 +1,15 @@
-package com.mapter.aeroclaims_ftb.block;
+package com.zerox.aeroclaims_ftb.block;
 
-import com.mapter.aeroclaims_ftb.claim.AeroClaimManager;
-import com.mapter.aeroclaims_ftb.config.aeroclaims_ftbConfig;
-import com.mapter.aeroclaims_ftb.claim.aeroclaims_ftbavedData;
-import com.mapter.aeroclaims_ftb.claim.Claim;
-import com.mapter.aeroclaims_ftb.claim.ClaimManager;
-import com.mapter.aeroclaims_ftb.network.SyncClaimStatePacket;
-import com.mapter.aeroclaims_ftb.screen.ClaimSettingsMenu;
-import com.mapter.aeroclaims_ftb.sublevel.RegisteredSublevelManager;
-import com.mapter.aeroclaims_ftb.sublevel.SableShipUtils;
-import com.mapter.aeroclaims_ftb.sublevel.UnregisteredSublevelManager;
+import com.zerox.aeroclaims_ftb.claim.AeroClaimManager;
+import com.zerox.aeroclaims_ftb.config.aeroclaims_ftbConfig;
+import com.zerox.aeroclaims_ftb.claim.aeroclaims_ftbavedData;
+import com.zerox.aeroclaims_ftb.claim.Claim;
+import com.zerox.aeroclaims_ftb.claim.ClaimManager;
+import com.zerox.aeroclaims_ftb.network.SyncClaimStatePacket;
+import com.zerox.aeroclaims_ftb.screen.ClaimSettingsMenu;
+import com.zerox.aeroclaims_ftb.sublevel.RegisteredSublevelManager;
+import com.zerox.aeroclaims_ftb.sublevel.SableShipUtils;
+import com.zerox.aeroclaims_ftb.sublevel.UnregisteredSublevelManager;
 import com.mojang.serialization.MapCodec;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.core.BlockPos;

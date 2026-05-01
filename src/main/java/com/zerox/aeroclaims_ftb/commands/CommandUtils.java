@@ -1,6 +1,6 @@
-package com.mapter.aeroclaims_ftb.commands;
+package com.zerox.aeroclaims_ftb.commands;
 
-import com.mapter.aeroclaims_ftb.claim.AeroClaimManager;
+import com.zerox.aeroclaims_ftb.claim.AeroClaimManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;

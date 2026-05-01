@@ -1,6 +1,6 @@
-package com.mapter.aeroclaims_ftb.block;
+package com.zerox.aeroclaims_ftb.block;
 
-import com.mapter.aeroclaims_ftb.registry.ModBlocks;
+import com.zerox.aeroclaims_ftb.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;

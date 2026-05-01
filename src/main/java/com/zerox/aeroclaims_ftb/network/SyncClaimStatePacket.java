@@ -1,8 +1,8 @@
-package com.mapter.aeroclaims_ftb.network;
+package com.zerox.aeroclaims_ftb.network;
 
-import com.mapter.aeroclaims_ftb.aeroclaims_ftb;
-import com.mapter.aeroclaims_ftb.screen.ClaimSettingsMenu;
-import com.mapter.aeroclaims_ftb.screen.ClaimSettingsScreen;
+import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.screen.ClaimSettingsMenu;
+import com.zerox.aeroclaims_ftb.screen.ClaimSettingsScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
