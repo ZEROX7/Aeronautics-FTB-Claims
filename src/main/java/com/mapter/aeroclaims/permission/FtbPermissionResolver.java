@@ -1,30 +1,32 @@
 package com.mapter.aeroclaims.permission;
 
-import com.mapter.aeroclaims.claim.Claim;
-import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import dev.ftb.mods.ftbteams.api.FTBTeamsAPI;
 import dev.ftb.mods.ftbteams.api.Team;
 import dev.ftb.mods.ftbteams.api.TeamManager;
-import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Optional;
 import java.util.UUID;
 
 public class FtbPermissionResolver implements ClaimPermissionResolver {
+
     @Override
-    public boolean canAccess(ServerPlayer player, Claim claim) {
-        UUID playerUuid = player.getUUID();
-        UUID ownerUuid = claim.getOwner();
+    public boolean isSameParty(UUID playerUuid, UUID ownerUuid) {
+        if (!FTBTeamsAPI.api().isManagerLoaded()) return false;
 
-        if (playerUuid.equals(ownerUuid)) return true;
-        if (claim.isAllowOthers()) return true;
+        TeamManager teams = FTBTeamsAPI.api().getManager();
 
-        var chunks = FTBChunksAPI.api();
-        if (!chunks.isManagerLoaded()) return false;
+        Optional<Team> playerTeam = teams.getTeamForPlayerID(playerUuid);
+        Optional<Team> ownerTeam = teams.getTeamForPlayerID(ownerUuid);
 
-        if (chunks.getManager().getBypassProtection(playerUuid)) return true;
+        return playerTeam.isPresent()
+                && ownerTeam.isPresent()
+                && playerTeam.get().getId().equals(ownerTeam.get().getId());
+    }
 
-        if (!FTBTeamsAPI.api().isManagerLoaded()) return false;  
+    @Override
+    public boolean isAlly(UUID playerUuid, UUID ownerUuid) {
+        if (!FTBTeamsAPI.api().isManagerLoaded()) return false;
+
         TeamManager teams = FTBTeamsAPI.api().getManager();
 
         Optional<Team> playerTeam = teams.getTeamForPlayerID(playerUuid);
@@ -35,10 +37,8 @@ public class FtbPermissionResolver implements ClaimPermissionResolver {
         Team p = playerTeam.get();
         Team o = ownerTeam.get();
 
-        if (claim.isAllowParty() && p.getId().equals(o.getId())) return true;
-
-        // FTB Teams API has same-team built in; “allies” are not a direct OpenPAC concept.
-        // Treat allies as same team unless you add a custom FTB Teams property/rank relation.
-        return claim.isAllowAllies() && teams.arePlayersInSameTeam(playerUuid, ownerUuid);
+        // FIX: correct ally detection
+        return p.isMember(ownerUuid) // same team shortcut
+                || p.getAllyTeams().contains(o.getId());
     }
 }
