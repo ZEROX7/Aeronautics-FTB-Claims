@@ -14,11 +14,12 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
-@Mod(aeroclaims_ftb.MODID)
-public class AeroClaims {
+@Mod(Aeroclaims_ftb.MODID)
+public class Aeroclaims_ftb {
+
     public static final String MODID = "aeroclaims_ftb";
 
-public Aeroclaims_ftb(IEventBus modBus, ModContainer modContainer) {
+    public Aeroclaims_ftb(IEventBus modBus, ModContainer modContainer) {
     
         ModBlocks.register(modBus);
         ModMenus.register(modBus);
