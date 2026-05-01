@@ -18,7 +18,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 public class AeroClaims {
     public static final String MODID = "aeroclaims_ftb";
 
-    public aeroclaims_ftb(IEventBus modBus, ModContainer modContainer) {
+public Aeroclaims_ftb(IEventBus modBus, ModContainer modContainer) {
     
         ModBlocks.register(modBus);
         ModMenus.register(modBus);
