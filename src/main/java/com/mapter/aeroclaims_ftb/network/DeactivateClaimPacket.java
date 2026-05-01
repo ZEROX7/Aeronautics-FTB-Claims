@@ -1,10 +1,10 @@
 package com.mapter.aeroclaims_ftb.network;
 
-import com.mapter.aeroclaims_ftb.Aeroclaims;
-import com.mapter.aeroclaims_ftb.claim.AeroClaimSavedData;
+import com.mapter.aeroclaims_ftb.aeroclaims_ftb;
+import com.mapter.aeroclaims_ftb.claim.aeroclaims_ftbavedData;
 import com.mapter.aeroclaims_ftb.claim.Claim;
 import com.mapter.aeroclaims_ftb.claim.ClaimManager;
-import com.mapter.aeroclaims_ftb.config.AeroClaimsConfig;
+import com.mapter.aeroclaims_ftb.config.aeroclaims_ftbConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -19,7 +19,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 public record DeactivateClaimPacket(BlockPos center) implements CustomPacketPayload {
 
     public static final Type<DeactivateClaimPacket> TYPE =
-            new Type<>(ResourceLocation.fromNamespaceAndPath(Aeroclaims.MODID, "deactivate_claim"));
+            new Type<>(ResourceLocation.fromNamespaceAndPath(aeroclaims_ftb.MODID, "deactivate_claim"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, DeactivateClaimPacket> STREAM_CODEC =
             StreamCodec.composite(
@@ -41,7 +41,7 @@ public record DeactivateClaimPacket(BlockPos center) implements CustomPacketPayl
             ClaimManager.deactivateClaim(level, msg.center);
             player.sendSystemMessage(Component.translatable("message.aeroclaims_ftb.claim_deactivated"));
 
-            AeroClaimSavedData data = AeroClaimSavedData.get(level);
+            aeroclaims_ftbavedData data = aeroclaims_ftbavedData.get(level);
             Integer cachedCount = data.getCachedShipBlockCount(msg.center);
             int shipBlockCount = cachedCount != null ? cachedCount : SyncClaimStatePacket.SHIP_BLOCK_COUNT_UNKNOWN;
             PacketDistributor.sendToPlayer(player, new SyncClaimStatePacket(
@@ -52,7 +52,7 @@ public record DeactivateClaimPacket(BlockPos center) implements CustomPacketPayl
                     claim.isAllowOthers(),
                     data.getClaimsForBlock(msg.center),
                     data.getFreeSlots(player.getUUID()),
-                    AeroClaimsConfig.BLOCKS_PER_CLAIM.get(),
+                    aeroclaims_ftbConfig.BLOCKS_PER_CLAIM.get(),
                     shipBlockCount
             ));
         });

@@ -1,13 +1,13 @@
 package com.mapter.aeroclaims_ftb.commands;
 
-import com.mapter.aeroclaims_ftb.Aeroclaims;
+import com.mapter.aeroclaims_ftb.aeroclaims_ftb;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
-@EventBusSubscriber(modid = Aeroclaims.MODID)
+@EventBusSubscriber(modid = aeroclaims_ftb.MODID)
 public class Commands {
 
     @SubscribeEvent

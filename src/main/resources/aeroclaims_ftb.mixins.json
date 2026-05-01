@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.mapter.aeroclaims_ftb.mixin",
+  "package": "com.mapter.aeroclaims_ftb_ftb.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "MixinBlockEntityConfigurationPacket",

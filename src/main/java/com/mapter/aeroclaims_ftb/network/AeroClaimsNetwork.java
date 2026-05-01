@@ -1,13 +1,13 @@
 package com.mapter.aeroclaims_ftb.network;
 
-import com.mapter.aeroclaims_ftb.Aeroclaims;
+import com.mapter.aeroclaims_ftb.aeroclaims_ftb;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
-@EventBusSubscriber(modid = Aeroclaims.MODID, bus = EventBusSubscriber.Bus.MOD)
-public class AeroClaimsNetwork {
+@EventBusSubscriber(modid = aeroclaims_ftb.MODID, bus = EventBusSubscriber.Bus.MOD)
+public class aeroclaims_ftbNetwork {
 
     private static final String PROTOCOL_VERSION = "3";
 

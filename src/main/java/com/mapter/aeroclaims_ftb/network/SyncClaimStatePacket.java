@@ -1,6 +1,6 @@
 package com.mapter.aeroclaims_ftb.network;
 
-import com.mapter.aeroclaims_ftb.Aeroclaims;
+import com.mapter.aeroclaims_ftb.aeroclaims_ftb;
 import com.mapter.aeroclaims_ftb.screen.ClaimSettingsMenu;
 import com.mapter.aeroclaims_ftb.screen.ClaimSettingsScreen;
 import net.minecraft.client.Minecraft;
@@ -26,7 +26,7 @@ public record SyncClaimStatePacket(
     public static final int SHIP_BLOCK_COUNT_UNKNOWN = -1;
 
     public static final Type<SyncClaimStatePacket> TYPE =
-            new Type<>(ResourceLocation.fromNamespaceAndPath(Aeroclaims.MODID, "sync_claim_state"));
+            new Type<>(ResourceLocation.fromNamespaceAndPath(aeroclaims_ftb.MODID, "sync_claim_state"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SyncClaimStatePacket> STREAM_CODEC =
             StreamCodec.of(

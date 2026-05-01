@@ -3,8 +3,8 @@ loaderVersion = "[4,)"
 license = "MIT"
 
 [[mods]]
-modId="aeroclaims"
-version="0.8.4"
+modId="aeroclaims_ftb_ftb"
+version="1.0.0"
 displayName="Aeronautics Claims"
 authors="Mapter"
 description='''
@@ -12,30 +12,30 @@ Aeronautics Claims.
 '''
 
 [[mixins]]
-config = "aeroclaims.mixins.json"
+config = "aeroclaims_ftb.mixins.json"
 
-[[dependencies.aeroclaims]]
+[[dependencies.aeroclaims_ftb]]
 modId = "neoforge"
 type = "required"
 versionRange = "[21.1.200,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.aeroclaims]]
+[[dependencies.aeroclaims_ftb]]
 modId = "minecraft"
 type = "required"
 versionRange = "[1.21.1,1.22)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.aeroclaims]]
+[[dependencies.aeroclaims_ftb]]
 modId = "ftbchunks"
 type = "required"
 versionRange = "[0,)"
 ordering = "AFTER"
 side = "BOTH"
 
-[[dependencies.aeroclaims]]
+[[dependencies.aeroclaims_ftb]]
 modId = "ftbteams"
 type = "required"
 versionRange = "[0,)"
