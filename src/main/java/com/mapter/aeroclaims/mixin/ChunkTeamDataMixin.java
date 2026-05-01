@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
 import java.util.UUID;
 
 @Mixin(value = ChunkTeamData.class, remap = false)
-public abstract class ChunkTeamDataMixin {
+public interface ChunkTeamDataMixin {
 
     @Unique
     private UUID aeroclaims$getTeamIdReflective() {
@@ -23,10 +23,10 @@ public abstract class ChunkTeamDataMixin {
             Method method = this.getClass().getMethod("getTeam");
             Object team = method.invoke(this);
             if (team == null) return null;
-    
+
             Method idMethod = team.getClass().getMethod("getTeamId");
             Object result = idMethod.invoke(team);
-    
+
             return result instanceof UUID uuid ? uuid : null;
         } catch (Exception e) {
             return null;
