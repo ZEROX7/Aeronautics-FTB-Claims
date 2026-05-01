@@ -1,6 +1,6 @@
 package com.zerox.aeroclaims_ftb.network;
 
-import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.Aeroclaims_ftb;
 import com.zerox.aeroclaims_ftb.claim.Claim;
 import com.zerox.aeroclaims_ftb.claim.ClaimManager;
 import com.zerox.aeroclaims_ftb.claim.ClaimSavedData;
@@ -15,7 +15,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record UpdateClaimSettingsPacket(BlockPos center, boolean allowParty, boolean allowAllies, boolean allowOthers) implements CustomPacketPayload {
 
-    public static final Type<UpdateClaimSettingsPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(aeroclaims_ftb.MODID, "update_claim_settings"));
+    public static final Type<UpdateClaimSettingsPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(Aeroclaims_ftb.MODID, "update_claim_settings"));
     public static final StreamCodec<RegistryFriendlyByteBuf, UpdateClaimSettingsPacket> STREAM_CODEC = StreamCodec.composite(
             BlockPos.STREAM_CODEC, UpdateClaimSettingsPacket::center,
             ByteBufCodecs.BOOL, UpdateClaimSettingsPacket::allowParty,

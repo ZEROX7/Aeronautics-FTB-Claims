@@ -1,6 +1,6 @@
 package com.zerox.aeroclaims_ftb.network;
 
-import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.Aeroclaims_ftb;
 import com.zerox.aeroclaims_ftb.sublevel.RegisteredSublevelManager;
 import com.zerox.aeroclaims_ftb.sublevel.SableShipUtils;
 import com.zerox.aeroclaims_ftb.sublevel.UnregisteredSublevelManager;
@@ -24,7 +24,7 @@ public record RegisterShipPacket(BlockPos pos) implements CustomPacketPayload {
     private static final Logger LOGGER = LoggerFactory.getLogger(RegisterShipPacket.class);
 
     public static final Type<RegisterShipPacket> TYPE =
-            new Type<>(ResourceLocation.fromNamespaceAndPath(aeroclaims_ftb.MODID, "register_ship"));
+            new Type<>(ResourceLocation.fromNamespaceAndPath(Aeroclaims_ftb.MODID, "register_ship"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, RegisterShipPacket> STREAM_CODEC =
             StreamCodec.composite(

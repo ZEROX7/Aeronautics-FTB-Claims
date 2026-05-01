@@ -1,10 +1,10 @@
 package com.zerox.aeroclaims_ftb.network;
 
-import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
-import com.zerox.aeroclaims_ftb.claim.aeroclaims_ftbavedData;
+import com.zerox.aeroclaims_ftb.Aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.claim.AeroClaimSavedData;
 import com.zerox.aeroclaims_ftb.claim.Claim;
 import com.zerox.aeroclaims_ftb.claim.ClaimManager;
-import com.zerox.aeroclaims_ftb.config.aeroclaims_ftbConfig;
+import com.zerox.aeroclaims_ftb.config.AeroClaimConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -19,7 +19,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 public record DeactivateClaimPacket(BlockPos center) implements CustomPacketPayload {
 
     public static final Type<DeactivateClaimPacket> TYPE =
-            new Type<>(ResourceLocation.fromNamespaceAndPath(aeroclaims_ftb.MODID, "deactivate_claim"));
+            new Type<>(ResourceLocation.fromNamespaceAndPath(Aeroclaims_ftb.MODID, "deactivate_claim"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, DeactivateClaimPacket> STREAM_CODEC =
             StreamCodec.composite(

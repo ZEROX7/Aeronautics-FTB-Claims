@@ -1,12 +1,12 @@
 package com.zerox.aeroclaims_ftb.network;
 
-import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.Aeroclaims_ftb;
 import com.zerox.aeroclaims_ftb.claim.AeroClaimManager;
-import com.zerox.aeroclaims_ftb.claim.aeroclaims_ftbavedData;
+import com.zerox.aeroclaims_ftb.claim.AeroClaimSavedData;
 import com.zerox.aeroclaims_ftb.claim.Claim;
 import com.zerox.aeroclaims_ftb.claim.ClaimManager;
 import com.zerox.aeroclaims_ftb.claim.ClaimSavedData;
-import com.zerox.aeroclaims_ftb.config.aeroclaims_ftbConfig;
+import com.zerox.aeroclaims_ftb.config.AeroClaimConfig;
 import com.zerox.aeroclaims_ftb.sublevel.SableShipUtils;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.core.BlockPos;
@@ -23,7 +23,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 public record RefreshClaimPacket(BlockPos center) implements CustomPacketPayload {
 
     public static final Type<RefreshClaimPacket> TYPE =
-            new Type<>(ResourceLocation.fromNamespaceAndPath(aeroclaims_ftb.MODID, "refresh_claim"));
+            new Type<>(ResourceLocation.fromNamespaceAndPath(Aeroclaims_ftb.MODID, "refresh_claim"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, RefreshClaimPacket> STREAM_CODEC =
             StreamCodec.composite(
@@ -55,7 +55,7 @@ public record RefreshClaimPacket(BlockPos center) implements CustomPacketPayload
             int maxSize = AeroClaimManager.getBlockLimit(level, msg.center);
             boolean hasClaims = maxSize > 0;
 
-            boolean deactivateOnOverflow = aeroclaims_ftbConfig.DEACTIVATE_ON_OVERFLOW.get();
+            boolean deactivateOnOverflow = AeroClaimConfig.DEACTIVATE_ON_OVERFLOW.get();
             int blockCount;
 
             if (hasClaims) {

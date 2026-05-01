@@ -1,9 +1,9 @@
 package com.zerox.aeroclaims_ftb.protect;
 
-import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.Aeroclaims_ftb;
 import com.zerox.aeroclaims_ftb.claim.Claim;
 import com.zerox.aeroclaims_ftb.claim.ClaimManager;
-import com.zerox.aeroclaims_ftb.config.aeroclaims_ftbConfig;
+import com.zerox.aeroclaims_ftb.config.AeroClaimConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-@EventBusSubscriber(modid = aeroclaims_ftb.MODID)
+@EventBusSubscriber(modid = Aeroclaims_ftb.MODID)
 public class ProtectionEvents {
 
     private static final long MESSAGE_COOLDOWN_MS = 15_000;
@@ -36,7 +36,7 @@ public class ProtectionEvents {
         Claim exact = ClaimManager.getClaimAt(level, pos);
         if (exact != null) return exact;
 
-        int margin = aeroclaims_ftbConfig.CLAIM_MARGIN_BLOCKS.get();
+        int margin = AeroClaimConfig.CLAIM_MARGIN_BLOCKS.get();
         for (int r = 1; r <= margin; r++) {
             for (int dx = -r; dx <= r; dx++) {
                 for (int dz = -r; dz <= r; dz++) {

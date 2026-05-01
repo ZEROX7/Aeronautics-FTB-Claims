@@ -1,12 +1,12 @@
 package com.zerox.aeroclaims_ftb.network;
 
-import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.Aeroclaims_ftb;
 import com.zerox.aeroclaims_ftb.claim.AeroClaimManager;
-import com.zerox.aeroclaims_ftb.claim.aeroclaims_ftbavedData;
+import com.zerox.aeroclaims_ftb.claim.AeroClaimSavedData;
 import com.zerox.aeroclaims_ftb.claim.Claim;
 import com.zerox.aeroclaims_ftb.claim.ClaimManager;
 import com.zerox.aeroclaims_ftb.claim.ClaimSavedData;
-import com.zerox.aeroclaims_ftb.config.aeroclaims_ftbConfig;
+import com.zerox.aeroclaims_ftb.config.AeroClaimConfig;
 import com.zerox.aeroclaims_ftb.sublevel.RegisteredSublevelManager;
 import com.zerox.aeroclaims_ftb.sublevel.SableShipUtils;
 import com.zerox.aeroclaims_ftb.sublevel.UnregisteredSublevelManager;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public record ActivateClaimPacket(BlockPos center) implements CustomPacketPayload {
 
     public static final Type<ActivateClaimPacket> TYPE =
-            new Type<>(ResourceLocation.fromNamespaceAndPath(aeroclaims_ftb.MODID, "activate_claim"));
+            new Type<>(ResourceLocation.fromNamespaceAndPath(Aeroclaims_ftb.MODID, "activate_claim"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ActivateClaimPacket> STREAM_CODEC =
             StreamCodec.composite(
@@ -58,7 +58,7 @@ public record ActivateClaimPacket(BlockPos center) implements CustomPacketPayloa
                 return;
             }
 
-            aeroclaims_ftbavedData data = aeroclaims_ftbavedData.get(level);
+            AeroClaimSavedData data = AeroClaimSavedData.get(level);
             Integer cachedCount = data.getCachedShipBlockCount(msg.center);
 
             int blockCount;
@@ -97,7 +97,7 @@ public record ActivateClaimPacket(BlockPos center) implements CustomPacketPayloa
 
     private static void registerShip(ServerLevel level, BlockPos center, Claim claim, ServerPlayer player,
                                      int blockCount, int maxSize) {
-        aeroclaims_ftbavedData data = aeroclaims_ftbavedData.get(level);
+        AeroClaimSavedData data = AeroClaimSavedData.get(level);
         String shipId = data.getCachedShipId(center);
 
         if (shipId == null) {

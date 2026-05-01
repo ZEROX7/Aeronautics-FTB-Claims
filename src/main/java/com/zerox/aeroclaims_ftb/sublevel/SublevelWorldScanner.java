@@ -1,6 +1,6 @@
 package com.zerox.aeroclaims_ftb.sublevel;
 
-import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.Aeroclaims_ftb;
 import com.zerox.aeroclaims_ftb.claim.Claim;
 import dev.ryanhcode.sable.api.sublevel.ServerSubLevelContainer;
 import dev.ryanhcode.sable.api.sublevel.SubLevelContainer;
@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 
 
-@EventBusSubscriber(modid = aeroclaims_ftb.MODID)
+@EventBusSubscriber(modid = Aeroclaims_ftb.MODID)
 public class SublevelWorldScanner {
 
     private static final Logger LOGGER = LogManager.getLogger("aeroclaims_ftb/ShipWorldScanner");

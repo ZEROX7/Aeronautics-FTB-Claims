@@ -1,6 +1,6 @@
 package com.zerox.aeroclaims_ftb.screen;
 
-import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.Aeroclaims_ftb;
 import com.zerox.aeroclaims_ftb.network.ActivateClaimPacket;
 import com.zerox.aeroclaims_ftb.network.AdjustBlockClaimsPacket;
 import com.zerox.aeroclaims_ftb.network.DeactivateClaimPacket;
@@ -24,7 +24,7 @@ import java.util.Map;
 public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMenu> {
 
     private static final ResourceLocation BACKGROUND =
-            ResourceLocation.fromNamespaceAndPath(aeroclaims_ftb.MODID, "textures/screen/claim-menu.png");
+            ResourceLocation.fromNamespaceAndPath(Aeroclaims_ftb.MODID, "textures/screen/claim-menu.png");
 
     private static final int TEXTURE_W = 180;
     private static final int TEXTURE_H = 180;

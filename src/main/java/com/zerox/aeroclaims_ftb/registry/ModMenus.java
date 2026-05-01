@@ -1,7 +1,7 @@
 package com.zerox.aeroclaims_ftb.registry;
 
 import com.zerox.aeroclaims_ftb.screen.ClaimSettingsMenu;
-import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.Aeroclaims_ftb;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.bus.api.IEventBus;
@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModMenus {
 
     public static final DeferredRegister<MenuType<?>> MENUS =
-            DeferredRegister.create(BuiltInRegistries.MENU, aeroclaims_ftb.MODID);
+            DeferredRegister.create(BuiltInRegistries.MENU, Aeroclaims_ftb.MODID);
 
     public static final DeferredHolder<MenuType<?>, MenuType<ClaimSettingsMenu>> CLAIM_SETTINGS_MENU =
             MENUS.register("claim_settings",

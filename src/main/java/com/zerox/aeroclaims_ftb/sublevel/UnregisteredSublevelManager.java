@@ -1,7 +1,7 @@
 package com.zerox.aeroclaims_ftb.sublevel;
 
 import com.google.gson.*;
-import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.Aeroclaims_ftb;
 import dev.ryanhcode.sable.api.sublevel.ServerSubLevelContainer;
 import dev.ryanhcode.sable.api.sublevel.SubLevelContainer;
 import dev.ryanhcode.sable.sublevel.ServerSubLevel;
@@ -22,7 +22,7 @@ import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-@EventBusSubscriber(modid = aeroclaims_ftb.MODID)
+@EventBusSubscriber(modid = Aeroclaims_ftb.MODID)
 public class UnregisteredSublevelManager {
 
     private static final Logger LOGGER = LogManager.getLogger("aeroclaims_ftb/UnregisteredShipsManager");

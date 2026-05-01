@@ -2,7 +2,7 @@ package com.zerox.aeroclaims_ftb.registry;
 
 import com.zerox.aeroclaims_ftb.block.ClaimBlock;
 import com.zerox.aeroclaims_ftb.block.ClaimBlockEntity;
-import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.Aeroclaims_ftb;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -19,13 +19,13 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModBlocks {
 
     public static final DeferredRegister.Blocks BLOCKS =
-            DeferredRegister.createBlocks(aeroclaims_ftb.MODID);
+            DeferredRegister.createBlocks(Aeroclaims_ftb.MODID);
 
     public static final DeferredRegister.Items ITEMS =
-            DeferredRegister.createItems(aeroclaims_ftb.MODID);
+            DeferredRegister.createItems(Aeroclaims_ftb.MODID);
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
-            DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, aeroclaims_ftb.MODID);
+            DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Aeroclaims_ftb.MODID);
 
     public static final DeferredBlock<Block> CLAIM_BLOCK =
             BLOCKS.registerBlock("claim_block",

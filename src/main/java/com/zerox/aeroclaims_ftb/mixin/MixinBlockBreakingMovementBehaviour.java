@@ -49,7 +49,7 @@ public class MixinBlockBreakingMovementBehaviour {
         if (pos == null || context.world == null || context.world.isClientSide()) {
             return original;
         }
-        if (!aeroclaims_ftbConfig.KINETIC_BLOCK_PROTECTION.get()) {
+        if (!AeroClaimConfig.KINETIC_BLOCK_PROTECTION.get()) {
             return original;
         }
         if (!(context.world instanceof ServerLevel serverLevel)) {

@@ -1,6 +1,6 @@
 package com.zerox.aeroclaims_ftb.network;
 
-import com.zerox.aeroclaims_ftb.aeroclaims_ftb;
+import com.zerox.aeroclaims_ftb.Aeroclaims_ftb;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public record ClaimRefreshParticlesPacket(List<BlockPos> claimedBlocks) implements CustomPacketPayload {
 
-    public static final Type<ClaimRefreshParticlesPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(aeroclaims_ftb.MODID, "claim_refresh_particles"));
+    public static final Type<ClaimRefreshParticlesPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(Aeroclaims_ftb.MODID, "claim_refresh_particles"));
     public static final StreamCodec<RegistryFriendlyByteBuf, ClaimRefreshParticlesPacket> STREAM_CODEC = StreamCodec.of(
             (buf, packet) -> {
                 buf.writeVarInt(packet.claimedBlocks.size());
