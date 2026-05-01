@@ -15,7 +15,6 @@ import net.minecraft.server.level.ServerPlayer;
 import java.util.Map;
 import java.util.UUID;
 
-
 public class PlayerCommands {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -26,21 +25,20 @@ public class PlayerCommands {
 
                 .then(Commands.literal("transfer")
                     .then(Commands.literal("to")
-                        .then(Commands.literal("opac")
+                        .then(Commands.literal("ftb")
                             .then(Commands.argument("amount", IntegerArgumentType.integer(1))
-                                .executes(ctx -> executeTransferToOpac(
+                                .executes(ctx -> executeTransferToFtb(
                                         ctx.getSource(),
                                         IntegerArgumentType.getInteger(ctx, "amount")
                                 ))))
                         .then(Commands.literal("aero")
                             .then(Commands.argument("amount", IntegerArgumentType.integer(1))
-                                .executes(ctx -> executeTransferFromOpac(
+                                .executes(ctx -> executeTransferFromFtb(
                                         ctx.getSource(),
                                         IntegerArgumentType.getInteger(ctx, "amount")
                                 ))))))
         );
     }
-
 
     static int executeInfo(CommandSourceStack source, UUID targetUuid, String targetName) {
 
@@ -62,11 +60,11 @@ public class PlayerCommands {
         source.sendSuccess(() -> Component.translatable("commands.aeroclaims.info.ship_slots", usedSlots, migratedSlots), false);
 
         if (source.getEntity() instanceof ServerPlayer caller && caller.getUUID().equals(finalUuid)) {
-            int freeOpac = AeroClaimManager.getFreeOpacClaims(caller);
-            if (freeOpac >= 0) {
-                source.sendSuccess(() -> Component.translatable("commands.aeroclaims.claim_info.opac_free", freeOpac), false);
+            int freeFtb = AeroClaimManager.getFreeFtbClaims(caller);
+            if (freeFtb >= 0) {
+                source.sendSuccess(() -> Component.translatable("commands.aeroclaims.claim_info.ftb_free", freeFtb), false);
             } else {
-                source.sendSuccess(() -> Component.translatable("commands.aeroclaims.claim_info.opac_unavailable"), false);
+                source.sendSuccess(() -> Component.translatable("commands.aeroclaims.claim_info.ftb_unavailable"), false);
             }
         }
 
@@ -85,7 +83,6 @@ public class PlayerCommands {
         return 1;
     }
 
-
     private static MutableComponent buildShipEntry(String shipName, String shipId) {
         return Component.translatable("commands.aeroclaims.info.entry", shipName)
                 .withStyle(style -> style
@@ -100,13 +97,12 @@ public class PlayerCommands {
                 );
     }
 
-
-    private static int executeTransferFromOpac(CommandSourceStack source, int amount) {
+    private static int executeTransferFromFtb(CommandSourceStack source, int amount) {
         ServerPlayer player = CommandUtils.requirePlayer(source);
         if (player == null) return 0;
 
-        int freeOpac = AeroClaimManager.getFreeOpacClaims(player);
-        AeroClaimManager.TransferResult result = AeroClaimManager.transferFromOpac(player, amount);
+        int freeFtb = AeroClaimManager.getFreeFtbClaims(player);
+        AeroClaimManager.TransferResult result = AeroClaimManager.transferFromFtb(player, amount);
 
         switch (result) {
             case SUCCESS -> {
@@ -117,11 +113,11 @@ public class PlayerCommands {
                         "commands.aeroclaims.transfer.success", amount, newUsed, newMigrated
                 ), false);
             }
-            case OPAC_NOT_LOADED ->
-                    source.sendFailure(Component.translatable("commands.aeroclaims.transfer.opac_not_loaded"));
+            case FTB_NOT_LOADED ->
+                    source.sendFailure(Component.translatable("commands.aeroclaims.transfer.ftb_not_loaded"));
             case NOT_ENOUGH_FREE ->
                     source.sendFailure(Component.translatable(
-                            "commands.aeroclaims.transfer.not_enough", freeOpac, amount
+                            "commands.aeroclaims.transfer.not_enough", freeFtb, amount
                     ));
             case API_ERROR ->
                     source.sendFailure(Component.translatable("commands.aeroclaims.transfer.error"));
@@ -130,12 +126,12 @@ public class PlayerCommands {
         return CommandUtils.toResult(result);
     }
 
-    private static int executeTransferToOpac(CommandSourceStack source, int amount) {
+    private static int executeTransferToFtb(CommandSourceStack source, int amount) {
         ServerPlayer player = CommandUtils.requirePlayer(source);
         if (player == null) return 0;
 
         int freeShipClaims = AeroClaimManager.getFreeSlots(player.serverLevel(), player.getUUID());
-        AeroClaimManager.TransferResult result = AeroClaimManager.transferToOpac(player, amount);
+        AeroClaimManager.TransferResult result = AeroClaimManager.transferToFtb(player, amount);
 
         switch (result) {
             case SUCCESS -> {
@@ -146,8 +142,8 @@ public class PlayerCommands {
                         "commands.aeroclaims.transfer_back.success", amount, newUsed, newMigrated
                 ), false);
             }
-            case OPAC_NOT_LOADED ->
-                    source.sendFailure(Component.translatable("commands.aeroclaims.transfer.opac_not_loaded"));
+            case FTB_NOT_LOADED ->
+                    source.sendFailure(Component.translatable("commands.aeroclaims.transfer.ftb_not_loaded"));
             case NOT_ENOUGH_FREE ->
                     source.sendFailure(Component.translatable(
                             "commands.aeroclaims.transfer_back.not_enough", freeShipClaims, amount
