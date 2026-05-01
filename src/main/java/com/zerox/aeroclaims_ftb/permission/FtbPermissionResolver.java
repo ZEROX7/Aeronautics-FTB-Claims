@@ -4,6 +4,7 @@ import com.zerox.aeroclaims_ftb.claim.Claim;
 import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import dev.ftb.mods.ftbteams.api.FTBTeamsAPI;
 import dev.ftb.mods.ftbteams.api.TeamManager;
+import dev.ftb.mods.ftbteams.api.TeamRank;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.UUID;
@@ -30,10 +31,16 @@ public class FtbPermissionResolver implements ClaimPermissionResolver {
 
         TeamManager teams = FTBTeamsAPI.api().getManager();
 
-        boolean sameTeam = teams.arePlayersInSameTeam(playerUuid, ownerUuid);
-
-        if (sameTeam) {
+        if (teams.arePlayersInSameTeam(playerUuid, ownerUuid)) {
             return claim.isAllowParty();
+        }
+
+        boolean ally = teams.getTeamForPlayerID(ownerUuid)
+            .map(ownerTeam -> ownerTeam.getRankForPlayer(playerUuid) == TeamRank.ALLY)
+            .orElse(false);
+
+        if (ally) {
+            return claim.isAllowAllies(); // or whatever your Claim field is called
         }
 
         return false;
