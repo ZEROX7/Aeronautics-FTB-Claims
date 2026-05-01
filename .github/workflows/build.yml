@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  build-release:
     runs-on: ubuntu-latest
 
     steps:
@@ -34,7 +34,7 @@ jobs:
           fi
 
           echo "version=$NEXT_VERSION" >> "$GITHUB_OUTPUT"
-          echo "Next version: $NEXT_VERSION"
+          echo "tag=v$NEXT_VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
@@ -48,21 +48,26 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build -Pmod_version=${{ steps.version.outputs.version }}
 
-      - name: Rename JAR
+      - name: Find built JAR
+        id: jar
+        shell: bash
         run: |
-          mkdir -p release
-          cp build/libs/*.jar release/Aeronautics-FTB-Claims-${{ steps.version.outputs.version }}.jar
+          JAR_FILE=$(find build/libs -name "*.jar" ! -name "*-sources.jar" ! -name "*-javadoc.jar" | head -n 1)
+          echo "file=$JAR_FILE" >> "$GITHUB_OUTPUT"
+          echo "Found jar: $JAR_FILE"
 
-      - name: Upload JAR artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: Aeronautics-FTB-Claims-${{ steps.version.outputs.version }}
-          path: release/Aeronautics-FTB-Claims-${{ steps.version.outputs.version }}.jar
-
-      - name: Tag successful build
-        if: success()
+      - name: Create tag
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git tag v${{ steps.version.outputs.version }}
-          git push origin v${{ steps.version.outputs.version }}
+          git tag ${{ steps.version.outputs.tag }}
+          git push origin ${{ steps.version.outputs.tag }}
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create ${{ steps.version.outputs.tag }} \
+            "${{ steps.jar.outputs.file }}" \
+            --title "Aeronautics FTB Claims ${{ steps.version.outputs.version }}" \
+            --generate-notes
