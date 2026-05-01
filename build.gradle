@@ -85,6 +85,7 @@ neoForge {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
+    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
     api "dev.ryanhcode.sable:sable-common-1.21.1:1.0.6"
     implementation "curse.maven:ftb-library-forge-404465:7746959"
     implementation "curse.maven:ftb-chunks-forge-314906:7608681"
