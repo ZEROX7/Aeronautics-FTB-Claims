@@ -20,8 +20,13 @@ public abstract class ChunkTeamDataMixin {
     @Unique
     private UUID aeroclaims$getTeamIdReflective() {
         try {
-            Method method = this.getClass().getMethod("getTeamId");
-            Object result = method.invoke(this);
+            Method method = this.getClass().getMethod("getTeam");
+            Object team = method.invoke(this);
+            if (team == null) return null;
+    
+            Method idMethod = team.getClass().getMethod("getTeamId");
+            Object result = idMethod.invoke(team);
+    
             return result instanceof UUID uuid ? uuid : null;
         } catch (Exception e) {
             return null;
