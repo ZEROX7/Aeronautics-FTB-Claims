@@ -32,7 +32,7 @@ public class AeroClaimManager {
             ChunkTeamData teamData = chunksApi.getManager().getOrCreateData(player);
             if (teamData == null) return TransferResult.API_ERROR;
 
-            UUID teamId = teamData.getTeam().getTeamId();
+            UUID ownerId = player.getUUID();
 
             int freeFtbClaims = Math.max(
                     0,
@@ -43,7 +43,7 @@ public class AeroClaimManager {
                 return TransferResult.NOT_ENOUGH_FREE;
             }
 
-            AeroClaimSavedData.get(player.serverLevel()).addMigratedSlots(teamId, amount);
+            AeroClaimSavedData.get(player.serverLevel()).addMigratedSlots(ownerId, amount);
 
             return TransferResult.SUCCESS;
         } catch (Exception e) {
@@ -62,16 +62,16 @@ public class AeroClaimManager {
             ChunkTeamData teamData = chunksApi.getManager().getOrCreateData(player);
             if (teamData == null) return TransferResult.API_ERROR;
 
-            UUID teamId = teamData.getTeam().getTeamId();
+            UUID ownerId = player.getUUID();
 
             AeroClaimSavedData data = AeroClaimSavedData.get(player.serverLevel());
 
-            if (data.getFreeSlots(teamId) < amount) {
+            if (data.getFreeSlots(ownerId) < amount) {
                 return TransferResult.NOT_ENOUGH_FREE;
             }
 
-            int previousMigrated = data.getMigratedSlots(teamId);
-            data.setMigratedSlots(teamId, previousMigrated - amount);
+            int previousMigrated = data.getMigratedSlots(ownerId);
+            data.setMigratedSlots(ownerId, previousMigrated - amount);
 
             return TransferResult.SUCCESS;
         } catch (Exception e) {
