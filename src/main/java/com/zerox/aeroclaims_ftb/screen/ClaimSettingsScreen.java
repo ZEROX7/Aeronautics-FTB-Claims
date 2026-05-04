@@ -1,11 +1,6 @@
 package com.zerox.aeroclaims_ftb.screen;
 
-import com.zerox.aeroclaims_ftb.network.ActivateClaimPacket;
-import com.zerox.aeroclaims_ftb.network.AdjustBlockClaimsPacket;
-import com.zerox.aeroclaims_ftb.network.DeactivateClaimPacket;
-import com.zerox.aeroclaims_ftb.network.RefreshClaimPacket;
-import com.zerox.aeroclaims_ftb.network.SyncClaimStatePacket;
-import com.zerox.aeroclaims_ftb.network.UpdateClaimSettingsPacket;
+import com.zerox.aeroclaims_ftb.network.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -39,8 +34,9 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
     private static final int TEAM_Y = 43;
     private static final int ALLIES_Y = 64;
     private static final int PUBLIC_Y = 85;
-    private static final int ACTION_Y = 112;
-    private static final int CLAIM_ROW_Y = 132;
+    private static final int ACTION_Y = 108;
+    private static final int CLAIM_ROW_Y = 124;
+
     private static final int SMALL_BTN = 13;
 
     private Button partyButton;
@@ -130,8 +126,8 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
         g.fill(x1 + 5, y1 + 29, x2 - 5, y1 + 30, 0xFF2F6F9E);
 
         drawSection(g, x1 + 6, y1 + 38, x2 - 6, y1 + 100);
-        drawSection(g, x1 + 6, y1 + 106, x2 - 6, y1 + 134);
-        drawSection(g, x1 + 6, y1 + 139, x2 - 6, y2 - 6);
+        drawSection(g, x1 + 6, y1 + 104, x2 - 6, y1 + 132);
+        drawSection(g, x1 + 6, y1 + 135, x2 - 6, y2 - 6);
     }
 
     @Override
@@ -142,13 +138,33 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
         int claimTextY = CLAIM_ROW_Y + 4;
 
         String claimsText = menu.getClaimsForBlock() + " claims";
-        g.drawString(font, claimsText, 38, claimTextY, COLOR_TEXT, false);
+        int leftAreaX = 30;
+        int leftAreaW = 60;
+
+        g.drawString(
+                font,
+                claimsText,
+                leftAreaX + (leftAreaW - font.width(claimsText)) / 2,
+                claimTextY,
+                COLOR_TEXT,
+                false
+        );
 
         String blocksText = blocksText();
         int blocksColor = blocksOverLimit() ? COLOR_ERR : COLOR_TEXT;
-        g.drawString(font, blocksText, imageWidth - 16 - font.width(blocksText), claimTextY, blocksColor, false);
+        int rightAreaX = imageWidth - 16;
+        int rightAreaW = 70;
 
-        int infoY = 148;
+        g.drawString(
+                font,
+                blocksText,
+                rightAreaX - rightAreaW + (rightAreaW - font.width(blocksText)) / 2,
+                claimTextY,
+                blocksColor,
+                false
+        );
+
+        int infoY = 136;
 
         boolean active = menu.isClaimActive();
         String prefix = Component.translatable("screen.aeroclaims_ftb.claim_settings.privacy_prefix").getString();
@@ -166,22 +182,33 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
                     .getProfile()
                     .getName();
 
-            g.drawString(font,
+            g.drawString(
+                    font,
                     Component.translatable("screen.aeroclaims_ftb.claim_settings.owner", ownerName).getString(),
-                    16, infoY + 11, COLOR_TEXT, false);
+                    16,
+                    infoY + 12,
+                    COLOR_TEXT,
+                    false
+            );
         } catch (Exception ignored) {
         }
 
-        int nameY = infoY + 22;
+        int nameY = infoY + 26;
 
         if (!menu.isOnShip()) {
-            g.drawString(font,
+            g.drawString(
+                    font,
                     Component.translatable("screen.aeroclaims_ftb.claim_settings.not_on_subclaim").getString(),
-                    16, nameY, COLOR_ERR, false);
+                    16,
+                    nameY,
+                    COLOR_ERR,
+                    false
+            );
         } else if (menu.getShipName() != null && !menu.getShipName().isEmpty()) {
             for (FormattedCharSequence line : font.split(
                     Component.translatable("screen.aeroclaims_ftb.claim_settings.ship", menu.getShipName()),
-                    130)) {
+                    130
+            )) {
                 g.drawString(font, line, 16, nameY, COLOR_TEXT, false);
                 nameY += font.lineHeight;
             }
@@ -295,8 +322,11 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
     }
 
     private void sendActionButtonClick() {
-        if (inActivateMode) sendActivate();
-        else sendDeactivate();
+        if (inActivateMode) {
+            sendActivate();
+        } else {
+            sendDeactivate();
+        }
     }
 
     private void sendActivate() {
@@ -414,7 +444,7 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
 
             boolean hovered = isHoveredOrFocused();
 
-            int bg = !active ? 0x8830363F : hovered ? 0xCC4A5664 : 0xCC3A424D;
+            int bg = !active ? 0xAA2A313C : hovered ? 0xCC4A5664 : 0xCC3A424D;
             int border = !active ? 0xAA1A1E24 : hovered ? 0xFF8FBFE8 : 0xFF5E6B78;
 
             g.fill(x1, y1, x2, y2, 0xFF090B0F);
