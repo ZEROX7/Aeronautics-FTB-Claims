@@ -1,14 +1,17 @@
 package com.zerox.aeroclaims_ftb.screen;
 
-import com.zerox.aeroclaims_ftb.Aeroclaims_ftb;
-import com.zerox.aeroclaims_ftb.network.*;
+import com.zerox.aeroclaims_ftb.network.ActivateClaimPacket;
+import com.zerox.aeroclaims_ftb.network.AdjustBlockClaimsPacket;
+import com.zerox.aeroclaims_ftb.network.DeactivateClaimPacket;
+import com.zerox.aeroclaims_ftb.network.RefreshClaimPacket;
+import com.zerox.aeroclaims_ftb.network.SyncClaimStatePacket;
+import com.zerox.aeroclaims_ftb.network.UpdateClaimSettingsPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -17,9 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMenu> {
-
-    private static final ResourceLocation BACKGROUND =
-            ResourceLocation.fromNamespaceAndPath(Aeroclaims_ftb.MODID, "textures/screen/claim-menu.png");
 
     private static final int TEXTURE_W = 190;
     private static final int TEXTURE_H = 178;
@@ -41,7 +41,6 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
     private static final int PUBLIC_Y = 85;
     private static final int ACTION_Y = 112;
     private static final int CLAIM_ROW_Y = 132;
-
     private static final int SMALL_BTN = 13;
 
     private Button partyButton;
@@ -116,7 +115,23 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
 
     @Override
     protected void renderBg(GuiGraphics g, float partialTick, int mx, int my) {
-        g.blit(BACKGROUND, leftPos, topPos, 0, 0, TEXTURE_W, TEXTURE_H, TEXTURE_W, TEXTURE_H);
+        int x1 = leftPos;
+        int y1 = topPos;
+        int x2 = x1 + imageWidth;
+        int y2 = y1 + imageHeight;
+
+        g.fill(x1 + 3, y1 + 3, x2 + 3, y2 + 3, 0x77000000);
+
+        g.fill(x1, y1, x2, y2, 0xF01E242C);
+        drawBorder(g, x1, y1, x2, y2, 0xFF080A0D);
+        drawBorder(g, x1 + 1, y1 + 1, x2 - 1, y2 - 1, 0xFF3A4452);
+
+        g.fill(x1 + 5, y1 + 7, x2 - 5, y1 + 28, 0xF02A313C);
+        g.fill(x1 + 5, y1 + 29, x2 - 5, y1 + 30, 0xFF2F6F9E);
+
+        drawSection(g, x1 + 6, y1 + 38, x2 - 6, y1 + 100);
+        drawSection(g, x1 + 6, y1 + 106, x2 - 6, y1 + 134);
+        drawSection(g, x1 + 6, y1 + 139, x2 - 6, y2 - 6);
     }
 
     @Override
@@ -280,11 +295,8 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
     }
 
     private void sendActionButtonClick() {
-        if (inActivateMode) {
-            sendActivate();
-        } else {
-            sendDeactivate();
-        }
+        if (inActivateMode) sendActivate();
+        else sendDeactivate();
     }
 
     private void sendActivate() {
@@ -323,9 +335,11 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
             return Component.translatable("screen.aeroclaims_ftb.claim_settings.blocks_unknown").getString();
         }
 
-        int limit = menu.getBlockLimit();
-
-        return Component.translatable("screen.aeroclaims_ftb.claim_settings.blocks_usage", count, limit).getString();
+        return Component.translatable(
+                "screen.aeroclaims_ftb.claim_settings.blocks_usage",
+                count,
+                menu.getBlockLimit()
+        ).getString();
     }
 
     private boolean blocksOverLimit() {
@@ -368,6 +382,19 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
                 : "screen.aeroclaims_ftb.claim_settings.others.denied");
     }
 
+    private void drawSection(GuiGraphics g, int x1, int y1, int x2, int y2) {
+        g.fill(x1, y1, x2, y2, 0xF0181C22);
+        drawBorder(g, x1, y1, x2, y2, 0xFF38424F);
+        g.fill(x1, y1, x1 + 1, y2, 0xFF2F6F9E);
+    }
+
+    private void drawBorder(GuiGraphics g, int x1, int y1, int x2, int y2, int color) {
+        g.fill(x1, y1, x2, y1 + 1, color);
+        g.fill(x1, y2 - 1, x2, y2, color);
+        g.fill(x1, y1, x1 + 1, y2, color);
+        g.fill(x2 - 1, y1, x2, y2, color);
+    }
+
     private static class FtbButton extends Button {
 
         protected FtbButton(int x, int y, int width, int height, Component message, OnPress onPress) {
@@ -387,7 +414,7 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
 
             boolean hovered = isHoveredOrFocused();
 
-            int bg = !active ? 0x9930363F : hovered ? 0xCC4A5664 : 0xCC3A424D;
+            int bg = !active ? 0x8830363F : hovered ? 0xCC4A5664 : 0xCC3A424D;
             int border = !active ? 0xAA1A1E24 : hovered ? 0xFF8FBFE8 : 0xFF5E6B78;
 
             g.fill(x1, y1, x2, y2, 0xFF090B0F);
