@@ -28,16 +28,27 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
     private static final Map<BlockPos, Long> refreshCooldowns = new HashMap<>();
     private static final Map<BlockPos, Boolean> activateUsedInCooldown = new HashMap<>();
 
-    private static final int BTN_X = 16;
     private static final int BTN_H = 18;
+    private static final int SMALL_BTN = 13;
+
+    private static final int ACCESS_X = 16;
+    private static final int ACCESS_W = 158;
 
     private static final int TEAM_Y = 43;
     private static final int ALLIES_Y = 64;
     private static final int PUBLIC_Y = 85;
-    private static final int ACTION_Y = 108;
-    private static final int CLAIM_ROW_Y = 124;
 
-    private static final int SMALL_BTN = 13;
+    private static final int ACTION_Y = 108;
+
+    private static final int CLAIM_ROW_Y = 123;
+    private static final int MINUS_X = 16;
+    private static final int CLAIM_TEXT_X = 30;
+    private static final int CLAIM_TEXT_W = 58;
+    private static final int BLOCK_TEXT_X = 92;
+    private static final int BLOCK_TEXT_W = 52;
+    private static final int PLUS_X = 146;
+
+    private static final int INFO_Y = 136;
 
     private Button partyButton;
     private Button alliesButton;
@@ -59,21 +70,19 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
     protected void init() {
         super.init();
 
-        int fullButtonW = 158;
-
-        partyButton = FtbButton.create(leftPos + BTN_X, topPos + TEAM_Y, fullButtonW, BTN_H, partyText(), b -> {
+        partyButton = FtbButton.create(leftPos + ACCESS_X, topPos + TEAM_Y, ACCESS_W, BTN_H, partyText(), b -> {
             menu.setAllowParty(!menu.isAllowParty());
             b.setMessage(partyText());
             sendPermissions();
         });
 
-        alliesButton = FtbButton.create(leftPos + BTN_X, topPos + ALLIES_Y, fullButtonW, BTN_H, alliesText(), b -> {
+        alliesButton = FtbButton.create(leftPos + ACCESS_X, topPos + ALLIES_Y, ACCESS_W, BTN_H, alliesText(), b -> {
             menu.setAllowAllies(!menu.isAllowAllies());
             b.setMessage(alliesText());
             sendPermissions();
         });
 
-        othersButton = FtbButton.create(leftPos + BTN_X, topPos + PUBLIC_Y, fullButtonW, BTN_H, othersText(), b -> {
+        othersButton = FtbButton.create(leftPos + ACCESS_X, topPos + PUBLIC_Y, ACCESS_W, BTN_H, othersText(), b -> {
             menu.setAllowOthers(!menu.isAllowOthers());
             b.setMessage(othersText());
             sendPermissions();
@@ -83,9 +92,9 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
 
         actionButton = FtbButton.create(leftPos + 94, topPos + ACTION_Y, 79, BTN_H, activateText(), b -> sendActionButtonClick());
 
-        minusButton = FtbButton.create(leftPos + 16, topPos + CLAIM_ROW_Y, SMALL_BTN, 16, Component.literal("-"), b -> sendAdjust(-1));
+        minusButton = FtbButton.create(leftPos + MINUS_X, topPos + CLAIM_ROW_Y, SMALL_BTN, 16, Component.literal("-"), b -> sendAdjust(-1));
 
-        plusButton = FtbButton.create(leftPos + 142, topPos + CLAIM_ROW_Y, SMALL_BTN, 16, Component.literal("+"), b -> sendAdjust(+1));
+        plusButton = FtbButton.create(leftPos + PLUS_X, topPos + CLAIM_ROW_Y, SMALL_BTN, 16, Component.literal("+"), b -> sendAdjust(+1));
 
         addRenderableWidget(partyButton);
         addRenderableWidget(alliesButton);
@@ -126,8 +135,8 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
         g.fill(x1 + 5, y1 + 29, x2 - 5, y1 + 30, 0xFF2F6F9E);
 
         drawSection(g, x1 + 6, y1 + 38, x2 - 6, y1 + 100);
-        drawSection(g, x1 + 6, y1 + 104, x2 - 6, y1 + 132);
-        drawSection(g, x1 + 6, y1 + 135, x2 - 6, y2 - 6);
+        drawSection(g, x1 + 6, y1 + 104, x2 - 6, y1 + 128);
+        drawSection(g, x1 + 6, y1 + 132, x2 - 6, y2 - 6);
     }
 
     @Override
@@ -138,33 +147,10 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
         int claimTextY = CLAIM_ROW_Y + 4;
 
         String claimsText = menu.getClaimsForBlock() + " claims";
-        int leftAreaX = 30;
-        int leftAreaW = 60;
-
-        g.drawString(
-                font,
-                claimsText,
-                leftAreaX + (leftAreaW - font.width(claimsText)) / 2,
-                claimTextY,
-                COLOR_TEXT,
-                false
-        );
+        drawCentered(g, claimsText, CLAIM_TEXT_X, CLAIM_TEXT_W, claimTextY, COLOR_TEXT);
 
         String blocksText = blocksText();
-        int blocksColor = blocksOverLimit() ? COLOR_ERR : COLOR_TEXT;
-        int rightAreaX = imageWidth - 16;
-        int rightAreaW = 70;
-
-        g.drawString(
-                font,
-                blocksText,
-                rightAreaX - rightAreaW + (rightAreaW - font.width(blocksText)) / 2,
-                claimTextY,
-                blocksColor,
-                false
-        );
-
-        int infoY = 136;
+        drawCentered(g, blocksText, BLOCK_TEXT_X, BLOCK_TEXT_W, claimTextY, blocksOverLimit() ? COLOR_ERR : COLOR_TEXT);
 
         boolean active = menu.isClaimActive();
         String prefix = Component.translatable("screen.aeroclaims_ftb.claim_settings.privacy_prefix").getString();
@@ -172,8 +158,8 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
                 ? "screen.aeroclaims_ftb.claim_settings.status.active"
                 : "screen.aeroclaims_ftb.claim_settings.status.disabled").getString();
 
-        g.drawString(font, prefix, 16, infoY, COLOR_TEXT, false);
-        g.drawString(font, status, 16 + font.width(prefix), infoY, active ? COLOR_OK : COLOR_ERR, false);
+        g.drawString(font, prefix, 16, INFO_Y, COLOR_TEXT, false);
+        g.drawString(font, status, 16 + font.width(prefix), INFO_Y, active ? COLOR_OK : COLOR_ERR, false);
 
         try {
             String ownerName = Minecraft.getInstance()
@@ -186,14 +172,14 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
                     font,
                     Component.translatable("screen.aeroclaims_ftb.claim_settings.owner", ownerName).getString(),
                     16,
-                    infoY + 12,
+                    INFO_Y + 12,
                     COLOR_TEXT,
                     false
             );
         } catch (Exception ignored) {
         }
 
-        int nameY = infoY + 26;
+        int nameY = INFO_Y + 26;
 
         if (!menu.isOnShip()) {
             g.drawString(
@@ -228,6 +214,10 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
         if (menu.isOnShip()) {
             updateActionButton();
         }
+    }
+
+    private void drawCentered(GuiGraphics g, String text, int x, int width, int y, int color) {
+        g.drawString(font, text, x + (width - font.width(text)) / 2, y, color, false);
     }
 
     private void refreshClaimButtons() {
