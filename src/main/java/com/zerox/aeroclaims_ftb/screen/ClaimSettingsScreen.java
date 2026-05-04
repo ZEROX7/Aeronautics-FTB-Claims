@@ -28,12 +28,12 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
 
     private static final int TEXTURE_W = 180;
     private static final int TEXTURE_H = 180;
-    private static final int COLOR_TITLE = 0x222222;
-    private static final int COLOR_TEXT  = 0x555555;
-    private static final int COLOR_OK    = 0x22AA22;
-    private static final int COLOR_ERR   = 0xCC3333;
+    private static final int COLOR_TITLE = 0xE6F4FF;
+    private static final int COLOR_TEXT = 0xAAB6C5;
+    private static final int COLOR_OK = 0x55D17A;
+    private static final int COLOR_ERR = 0xFF6B6B;
     private static final int COLOR_WHITE = 0xFFFFFF;
-    private static final int COLOR_DIV   = 0x66888888;
+    private static final int COLOR_DIV = 0x553FA9F5;
 
     private static final long REFRESH_COOLDOWN_MS = 30_000L;
     private static final Map<BlockPos, Long> refreshCooldowns = new HashMap<>();
