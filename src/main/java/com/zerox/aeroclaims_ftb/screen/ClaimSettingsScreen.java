@@ -1,12 +1,7 @@
 package com.zerox.aeroclaims_ftb.screen;
 
 import com.zerox.aeroclaims_ftb.Aeroclaims_ftb;
-import com.zerox.aeroclaims_ftb.network.ActivateClaimPacket;
-import com.zerox.aeroclaims_ftb.network.AdjustBlockClaimsPacket;
-import com.zerox.aeroclaims_ftb.network.DeactivateClaimPacket;
-import com.zerox.aeroclaims_ftb.network.RefreshClaimPacket;
-import com.zerox.aeroclaims_ftb.network.SyncClaimStatePacket;
-import com.zerox.aeroclaims_ftb.network.UpdateClaimSettingsPacket;
+import com.zerox.aeroclaims_ftb.network.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -33,7 +28,6 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
     private static final int COLOR_TEXT = 0xA8B4C2;
     private static final int COLOR_OK = 0x7ACB8A;
     private static final int COLOR_ERR = 0xD86A6A;
-    private static final int COLOR_DIV = 0x446F8799;
 
     private static final long REFRESH_COOLDOWN_MS = 30_000L;
     private static final Map<BlockPos, Long> refreshCooldowns = new HashMap<>();
@@ -46,7 +40,7 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
     private static final int ALLIES_Y = 64;
     private static final int PUBLIC_Y = 85;
     private static final int ACTION_Y = 112;
-    private static final int CLAIM_ROW_Y = 149;
+    private static final int CLAIM_ROW_Y = 132;
 
     private static final int SMALL_BTN = 13;
 
@@ -72,35 +66,31 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
 
         int fullButtonW = 158;
 
-        partyButton = Button.builder(partyText(), b -> {
+        partyButton = FtbButton.create(leftPos + BTN_X, topPos + TEAM_Y, fullButtonW, BTN_H, partyText(), b -> {
             menu.setAllowParty(!menu.isAllowParty());
             b.setMessage(partyText());
             sendPermissions();
-        }).bounds(leftPos + BTN_X, topPos + TEAM_Y, fullButtonW, BTN_H).build();
+        });
 
-        alliesButton = Button.builder(alliesText(), b -> {
+        alliesButton = FtbButton.create(leftPos + BTN_X, topPos + ALLIES_Y, fullButtonW, BTN_H, alliesText(), b -> {
             menu.setAllowAllies(!menu.isAllowAllies());
             b.setMessage(alliesText());
             sendPermissions();
-        }).bounds(leftPos + BTN_X, topPos + ALLIES_Y, fullButtonW, BTN_H).build();
+        });
 
-        othersButton = Button.builder(othersText(), b -> {
+        othersButton = FtbButton.create(leftPos + BTN_X, topPos + PUBLIC_Y, fullButtonW, BTN_H, othersText(), b -> {
             menu.setAllowOthers(!menu.isAllowOthers());
             b.setMessage(othersText());
             sendPermissions();
-        }).bounds(leftPos + BTN_X, topPos + PUBLIC_Y, fullButtonW, BTN_H).build();
+        });
 
-        refreshButton = Button.builder(refreshText(), b -> sendRefresh())
-                .bounds(leftPos + 16, topPos + ACTION_Y, 68, BTN_H).build();
+        refreshButton = FtbButton.create(leftPos + 16, topPos + ACTION_Y, 68, BTN_H, refreshText(), b -> sendRefresh());
 
-        actionButton = Button.builder(activateText(), b -> sendActionButtonClick())
-                .bounds(leftPos + 94, topPos + ACTION_Y, 79, BTN_H).build();
+        actionButton = FtbButton.create(leftPos + 94, topPos + ACTION_Y, 79, BTN_H, activateText(), b -> sendActionButtonClick());
 
-        minusButton = Button.builder(Component.literal("-"), b -> sendAdjust(-1))
-                .bounds(leftPos + 16, topPos + CLAIM_ROW_Y, SMALL_BTN, 16).build();
+        minusButton = FtbButton.create(leftPos + 16, topPos + CLAIM_ROW_Y, SMALL_BTN, 16, Component.literal("-"), b -> sendAdjust(-1));
 
-        plusButton = Button.builder(Component.literal("+"), b -> sendAdjust(+1))
-                .bounds(leftPos + 142, topPos + CLAIM_ROW_Y, SMALL_BTN, 16).build();
+        plusButton = FtbButton.create(leftPos + 142, topPos + CLAIM_ROW_Y, SMALL_BTN, 16, Component.literal("+"), b -> sendAdjust(+1));
 
         addRenderableWidget(partyButton);
         addRenderableWidget(alliesButton);
@@ -132,7 +122,7 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
     @Override
     protected void renderLabels(GuiGraphics g, int mx, int my) {
         String title = Component.translatable("screen.aeroclaims_ftb.claim_settings.title").getString();
-        g.drawString(font, title, 13, 14, COLOR_TITLE, false);
+        g.drawString(font, title, (imageWidth - font.width(title)) / 2, 14, COLOR_TITLE, false);
 
         int claimTextY = CLAIM_ROW_Y + 4;
 
@@ -141,9 +131,9 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
 
         String blocksText = blocksText();
         int blocksColor = blocksOverLimit() ? COLOR_ERR : COLOR_TEXT;
-        g.drawString(font, blocksText, 73, claimTextY, blocksColor, false);
+        g.drawString(font, blocksText, imageWidth - 16 - font.width(blocksText), claimTextY, blocksColor, false);
 
-        int infoY = 145;
+        int infoY = 148;
 
         boolean active = menu.isClaimActive();
         String prefix = Component.translatable("screen.aeroclaims_ftb.claim_settings.privacy_prefix").getString();
@@ -376,5 +366,43 @@ public class ClaimSettingsScreen extends AbstractContainerScreen<ClaimSettingsMe
         return Component.translatable(menu.isAllowOthers()
                 ? "screen.aeroclaims_ftb.claim_settings.others.allowed"
                 : "screen.aeroclaims_ftb.claim_settings.others.denied");
+    }
+
+    private static class FtbButton extends Button {
+
+        protected FtbButton(int x, int y, int width, int height, Component message, OnPress onPress) {
+            super(x, y, width, height, message, onPress, Button.DEFAULT_NARRATION);
+        }
+
+        public static FtbButton create(int x, int y, int width, int height, Component message, OnPress onPress) {
+            return new FtbButton(x, y, width, height, message, onPress);
+        }
+
+        @Override
+        protected void renderWidget(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
+            int x1 = getX();
+            int y1 = getY();
+            int x2 = x1 + width;
+            int y2 = y1 + height;
+
+            boolean hovered = isHoveredOrFocused();
+
+            int bg = !active ? 0x9930363F : hovered ? 0xCC4A5664 : 0xCC3A424D;
+            int border = !active ? 0xAA1A1E24 : hovered ? 0xFF8FBFE8 : 0xFF5E6B78;
+
+            g.fill(x1, y1, x2, y2, 0xFF090B0F);
+            g.fill(x1 + 1, y1 + 1, x2 - 1, y2 - 1, bg);
+
+            g.fill(x1, y1, x2, y1 + 1, border);
+            g.fill(x1, y2 - 1, x2, y2, border);
+            g.fill(x1, y1, x1 + 1, y2, border);
+            g.fill(x2 - 1, y1, x2, y2, border);
+
+            if (hovered && active) {
+                g.fill(x1 + 2, y1 + 2, x2 - 2, y1 + 3, 0x663FA9F5);
+            }
+
+            renderString(g, Minecraft.getInstance().font, active ? 0xFFE8EEF5 : 0xFF8A939E);
+        }
     }
 }
