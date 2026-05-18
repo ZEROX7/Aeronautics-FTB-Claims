@@ -5,12 +5,6 @@
   "screen.aeroclaims.claim_settings.activate": "Активировать",
   "screen.aeroclaims.claim_settings.deactivate": "Деактивировать",
   "screen.aeroclaims.claim_settings.refresh_wait": "Подождите 30 сек...",
-  "screen.aeroclaims.claim_settings.party.allowed": "Группа:  §a✔ Разрешено",
-  "screen.aeroclaims.claim_settings.party.denied": "Группа:  §c✘ Запрещено",
-  "screen.aeroclaims.claim_settings.allies.allowed": "Союзники:  §a✔ Разрешено",
-  "screen.aeroclaims.claim_settings.allies.denied": "Союзники:  §c✘ Запрещено",
-  "screen.aeroclaims.claim_settings.others.allowed": "Остальные:  §a✔ Разрешено",
-  "screen.aeroclaims.claim_settings.others.denied": "Остальные:  §c✘ Запрещено",
   "screen.aeroclaims.claim_settings.status.active": "активен",
   "screen.aeroclaims.claim_settings.status.disabled": "отключен",
   "screen.aeroclaims.claim_settings.privacy_prefix": "Приват: ",
@@ -58,5 +52,9 @@
   "message.aeroclaims.refresh_failed": "§cНе удалось обновить приват. Проверь настройки.",
   "message.aeroclaims.ship_registered": "Корабль запривачен: %s",
   "message.aeroclaims.not_on_subclaim": "§cБлок не на субклейме!",
-  "message.aeroclaims.duplicate_claim_block": "§cСначала уберите другие блоки привата с этого корабля!"
+  "message.aeroclaims.duplicate_claim_block": "§cСначала уберите другие блоки привата с этого корабля!",
+  "screen.aeroclaims.claim_settings.access_label": "Доступ: %s",
+  "screen.aeroclaims.claim_settings.access.party": "§bГруппа",
+  "screen.aeroclaims.claim_settings.access.party_ally": "§aГруппа + Союзники",
+  "screen.aeroclaims.claim_settings.access.all": "§eВсе"
 }

@@ -5,12 +5,6 @@
   "screen.aeroclaims.claim_settings.activate": "Activate",
   "screen.aeroclaims.claim_settings.deactivate": "Deactivate",
   "screen.aeroclaims.claim_settings.refresh_wait": "Wait 30 seconds...",
-  "screen.aeroclaims.claim_settings.party.allowed": "Party:  §a✔ Allowed",
-  "screen.aeroclaims.claim_settings.party.denied": "Party:  §c✘ Denied",
-  "screen.aeroclaims.claim_settings.allies.allowed": "Allies:  §a✔ Allowed",
-  "screen.aeroclaims.claim_settings.allies.denied": "Allies:  §c✘ Denied",
-  "screen.aeroclaims.claim_settings.others.allowed": "Others:  §a✔ Allowed",
-  "screen.aeroclaims.claim_settings.others.denied": "Others:  §c✘ Denied",
   "screen.aeroclaims.claim_settings.status.active": "active",
   "screen.aeroclaims.claim_settings.status.disabled": "disabled",
   "screen.aeroclaims.claim_settings.privacy_prefix": "Claim: ",
@@ -58,5 +52,9 @@
   "message.aeroclaims.refresh_failed": "§cFailed to refresh claim. Check claim configuration.",
   "message.aeroclaims.ship_registered": "Ship claimed: %s",
   "message.aeroclaims.not_on_subclaim": "§cBlock is not on a subclaim!",
-  "message.aeroclaims.duplicate_claim_block": "§cRemove other claim blocks from this ship first!"
+  "message.aeroclaims.duplicate_claim_block": "§cRemove other claim blocks from this ship first!",
+  "screen.aeroclaims.claim_settings.access_label": "Access: %s",
+  "screen.aeroclaims.claim_settings.access.party": "§bParty",
+  "screen.aeroclaims.claim_settings.access.party_ally": "§aParty + Ally",
+  "screen.aeroclaims.claim_settings.access.all": "§eAll"
 }
